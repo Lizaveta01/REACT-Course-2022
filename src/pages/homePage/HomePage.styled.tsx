@@ -17,11 +17,16 @@ export const CharListWrapper = styled.div`
   align-items: center;
   justify-content: center;
   padding: 40px;
-  flex-wrap: wrap;
-  gap: 40px;
+  ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 40px;
+  }
 `;
 
-export const CharItem = styled.div`
+export const CharItem = styled.li`
   display: flex;
   flex-direction: column;
   position: relative;

@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { Component } from 'react';
 import { ButtonSearch, FormWrapper, InputSearch } from './Search.styled';
 
