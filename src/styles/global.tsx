@@ -4,9 +4,6 @@ import { normalize } from 'styled-normalize';
 import { Colors } from './constansts';
 
 export const GlobalStyle = createGlobalStyle`
-@font-face{
-
-}
   ${normalize}
   #root{
     display: flex;
@@ -33,7 +30,11 @@ export const GlobalStyle = createGlobalStyle`
   a:hover {
     text-decoration: none;
   }
-  h1,
+  h1{
+    font-size: 40px;
+    font-weight: 700;
+    text-align: center;
+  }
   h2,
   h3,
   h4,
@@ -66,17 +67,5 @@ export const GlobalStyle = createGlobalStyle`
   button,
   textarea {
     font-family: inherit;
-  }
-  header {
-    background-color: ${Colors.BLACK};
-    height: 60px;
-    
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 60px;
-    a{
-      color: ${Colors.WHITE};
-    }
   }
   `;

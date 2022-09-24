@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter as Router } from 'react-router-dom';
 import './index.scss';
-import App from './components/app/App';
+import App from './pages/app/App';
+import CharService from './service/CharService';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement);
 root.render(
@@ -12,3 +13,7 @@ root.render(
     </Router>
   </React.StrictMode>
 );
+
+const charService = new CharService();
+
+charService.getAllCharacters();
