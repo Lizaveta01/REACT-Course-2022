@@ -1,19 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+
 import './index.scss';
 import App from './pages/app/App';
-import CharService from './service/CharService';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement);
 root.render(
   <React.StrictMode>
-    <Router>
+    <BrowserRouter>
       <App />
-    </Router>
-  </React.StrictMode>
+    </BrowserRouter>
+  </React.StrictMode>,
 );
-
-const charService = new CharService();
-
-charService.getAllCharacters();

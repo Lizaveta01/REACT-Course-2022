@@ -1,6 +1,7 @@
 import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import React from 'react';
+
 import CharList from '../pages/homePage/CharList';
 
 describe('CharList', () => {

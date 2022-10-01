@@ -18,7 +18,6 @@ export const GlobalStyle = createGlobalStyle`
     border: 0;
     box-sizing: border-box;
   }
-
   ol li,
   ul li {
     list-style: none;

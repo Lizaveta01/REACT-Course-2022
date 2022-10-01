@@ -20,4 +20,5 @@ class CharService {
     return res;
   };
 }
+
 export default CharService;

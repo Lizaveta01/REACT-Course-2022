@@ -1,6 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
+
 import Char from '../pages/homePage/Char';
 
 const initialData = {
@@ -20,7 +21,7 @@ describe('Char', () => {
     render(
       <BrowserRouter>
         <Char char={initialData} key={initialData.id} />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
     const element = screen.getByText(/Rick/i);
     expect(element).toBeInTheDocument();
@@ -30,7 +31,7 @@ describe('Char', () => {
     render(
       <BrowserRouter>
         <Char char={initialData} key={initialData.id} />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
     expect(screen.getByAltText('char-image')).toBeInTheDocument();
   });

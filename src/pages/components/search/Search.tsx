@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { ButtonSearch, FormWrapper, InputSearch } from './Search.styled';
 
 class Search extends Component {

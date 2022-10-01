@@ -1,9 +1,10 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
-import Search from '../pages/components/Search';
+
+import Search from '../pages/components/search/Search';
 import { mockLocalStorage } from './mockLocalStorage';
 
-const { getItemMock, setItemMock } = mockLocalStorage();
+const { getItemMock } = mockLocalStorage();
 describe('getdata', () => {
   it('fetches something from localStorage', () => {
     getItemMock.mockReturnValue('bar');

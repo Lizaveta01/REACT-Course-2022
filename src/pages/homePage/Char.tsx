@@ -1,5 +1,6 @@
 import React from 'react';
-import { IChar } from '../components/Interfaces';
+
+import { IChar } from '../../constants/Interfaces';
 import {
   CharItem,
   ButtonAddFavorite,

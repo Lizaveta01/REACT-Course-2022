@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-import { Colors } from '../../styles/constansts';
-import IconSearch from '../../assets/Search.svg';
+
+import { Colors } from '../../../styles/constansts';
+import IconSearch from '../../../assets/Search.svg';
+
 export const FormWrapper = styled.form`
   width: auto;
   position: relative;
@@ -10,7 +12,7 @@ export const InputSearch = styled.input`
   width: 300px;
   height: 38px;
   color: ${Colors.WHITE};
-  background-color: #ffffff6e;
+  background-color: ${Colors.GRAY};
   border-radius: 4px;
   padding-left: 8px;
   padding-right: 8px;

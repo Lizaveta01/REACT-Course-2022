@@ -1,10 +1,11 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+
 import HomePage from '../homePage/HomePage';
 import AboutUs from '../aboutPage/AboutPage';
 import NotFoundPage from '../notFoundPage/NotFoundPage';
 import { GlobalStyle } from '../../styles/global';
-import Header from '../components/Header';
+import Header from '../components/header/Header';
 
 const App = () => {
   return (
