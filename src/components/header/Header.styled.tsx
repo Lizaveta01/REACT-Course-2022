@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Colors } from '../../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 
 export const HeaderWrapper = styled.div`
   background-color: ${Colors.BLACK};

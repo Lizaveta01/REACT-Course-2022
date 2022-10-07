@@ -8,6 +8,7 @@ const Header = () => {
     <HeaderWrapper>
       <Link to={'/'}>Home</Link>
       <Link to={'/about'}>About us</Link>
+      <Link to={'/form'}>Form</Link>
     </HeaderWrapper>
   );
 };

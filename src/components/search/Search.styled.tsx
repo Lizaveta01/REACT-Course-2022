@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Colors } from '../../../styles/constansts';
+import { Colors } from '../../styles/constansts';
 import IconSearch from '../../../assets/Search.svg';
 
 export const FormWrapper = styled.form`

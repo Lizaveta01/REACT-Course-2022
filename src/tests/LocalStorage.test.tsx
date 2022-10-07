@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-import Search from '../pages/components/search/Search';
+import Search from '../components/search/Search';
 import { mockLocalStorage } from './mockLocalStorage';
 
 const { getItemMock } = mockLocalStorage();
