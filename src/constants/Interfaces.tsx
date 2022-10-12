@@ -9,3 +9,5 @@ export interface IChar {
   };
   image: string;
 }
+
+

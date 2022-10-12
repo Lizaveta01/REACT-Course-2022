@@ -1,17 +1,41 @@
 import React from 'react';
-import { Component } from 'react';
-import { Info, CardItem } from './CreatedCard.styled';
+import { ICreatedCard } from '../form/types';
+import {
+  Info,
+  CardItem,
+  ImgContainer,
+  BirthIcon,
+  BlockContainer,
+  PlanetIcon,
+  SpeciesIcon,
+  NewsIcon,
+  Name,
+} from './CreatedCard.styled';
 
-const CreatedCard = () => {
+type props = {
+  card: ICreatedCard;
+};
+
+const CreatedCard = ({ card }: props) => {
+  const { name, planet, birth, news, species, img } = card;
   return (
     <CardItem>
-      <img src="" alt="" />
+      <ImgContainer style={{ backgroundImage: `url(${img})` }} />
       <Info>
-        <p>Name</p>
-        <p>Country</p>
-        <p>Birth</p>
-        <p>Skills</p>
-        <p>Gender</p>
+        <Name>{name}</Name>
+        <BlockContainer>
+          <SpeciesIcon></SpeciesIcon>
+          <p>{species}</p>
+        </BlockContainer>
+        <BlockContainer>
+          <PlanetIcon />
+          <p>{planet}</p>
+        </BlockContainer>
+        <BlockContainer>
+          <BirthIcon />
+          <p>{birth}</p>
+        </BlockContainer>
+        <NewsIcon className={news === true ? 'active' : ''} />
       </Info>
     </CardItem>
   );

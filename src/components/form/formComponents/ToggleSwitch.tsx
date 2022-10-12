@@ -1,7 +1,7 @@
 import React, { ChangeEvent, Component } from 'react';
 import { Input, Label, Switch } from './ToggleSwitch.styled';
 
-class ToggleSwitch extends Component {
+class ToggleSwitch extends Component<IProps> {
   state = {
     checked: false,
   };
@@ -10,13 +10,20 @@ class ToggleSwitch extends Component {
 
   render() {
     const { checked } = this.state;
+    const { label, inputRef } = this.props;
     return (
       <Label>
         <span>
-          Are you a human? <br />
+          {label}
+          <br />
           {checked ? 'yes' : 'no'}
         </span>
-        <Input type="checkbox" onChange={this.handleChange} checked={checked}></Input>
+        <Input
+          type="checkbox"
+          ref={inputRef}
+          onChange={this.handleChange}
+          checked={checked}
+        ></Input>
         <Switch></Switch>
       </Label>
     );
@@ -24,3 +31,7 @@ class ToggleSwitch extends Component {
 }
 
 export default ToggleSwitch;
+export interface IProps {
+  label: string;
+  inputRef: React.RefObject<HTMLInputElement>;
+}

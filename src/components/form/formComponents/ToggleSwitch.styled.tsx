@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
-import { Colors } from '../../styles/constansts';
-
 export const Label = styled.label`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 30px;
   cursor: pointer;
+  margin: 10px 0px;
 `;
 export const Switch = styled.div`
   position: relative;
