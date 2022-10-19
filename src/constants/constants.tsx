@@ -1,6 +1,7 @@
 export enum Word {
   ALIEN = 'alien',
   HUMAN = 'human',
+  ACTIVE = 'active'
 }
 
 export interface IChar {

@@ -4,6 +4,7 @@ import { Component } from 'react';
 import CreatedCard from '../../components/createdCard/CreatedCard';
 import Form from '../../components/form/Form';
 import { ICreatedCard } from '../../components/form/types';
+import { Word } from '../../constants/constants';
 import { CardList, FormPageWrapper, ModalWindow } from './FormPage.styled';
 
 interface IPrevState {
@@ -18,7 +19,6 @@ class FormPage extends Component {
 
   addCard = (newCard: ICreatedCard) => {
     this.setState({ createdCards: [...this.state.createdCards, newCard] });
-    localStorage.setItem(`cards`, JSON.stringify(this.state.createdCards));
   };
 
   closeModalWindow = () => {
@@ -45,7 +45,7 @@ class FormPage extends Component {
               return <CreatedCard card={item} key={index} />;
             })}
         </CardList>
-        <ModalWindow className={isOpenModalWindow ? 'active' : ''}>
+        <ModalWindow className={isOpenModalWindow ? Word.ACTIVE : ''}>
           <p>Card was created successfully!</p>
         </ModalWindow>
       </FormPageWrapper>
