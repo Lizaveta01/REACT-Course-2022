@@ -3,7 +3,7 @@ export interface ICreatedCard {
   name: string;
   birth: string;
   planet: string;
-  species: boolean;
+  species: string;
   img: string;
   news: boolean;
 }

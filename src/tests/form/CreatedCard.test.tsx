@@ -8,7 +8,7 @@ const initialData = {
   name: 'Ricki',
   birth: '2000-02-12',
   planet: 'Earth',
-  species: true,
+  species: 'human',
   img: 'string',
   news: true,
 };
