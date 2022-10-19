@@ -1,3 +1,8 @@
+export enum Word {
+  ALIEN = 'alien',
+  HUMAN = 'human',
+}
+
 export interface IChar {
   id: number;
   name: string;
@@ -9,5 +14,3 @@ export interface IChar {
   };
   image: string;
 }
-
-

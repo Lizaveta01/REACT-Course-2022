@@ -1,9 +1,11 @@
-import React, { ChangeEvent, Component } from 'react';
-import { Input, Label, Switcher, SwitcherSlider, SwitcherTrack } from './ToggleSwitch.styled';
+import React, { Component } from 'react';
+
+import { Input, Label, Switcher, SwitcherSlider, SwitcherTrack } from './ToggleSwitcher.styled';
 
 class ToggleSwitch extends Component<IProps> {
   render() {
     const { label, inputRef } = this.props;
+
     return (
       <Label>
         {label}
@@ -19,6 +21,7 @@ class ToggleSwitch extends Component<IProps> {
 }
 
 export default ToggleSwitch;
+
 export interface IProps {
   label: string;
   inputRef: React.RefObject<HTMLInputElement>;

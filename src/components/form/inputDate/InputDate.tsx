@@ -1,27 +1,29 @@
 import React, { Component } from 'react';
-import { ErrorText, LabelName } from './FormComponents.styled';
 
-class InputName extends Component<IProps> {
+import { ErrorText } from '../Form.styled';
+import { LabelDate } from './InputDate.styled';
+
+class InputDate extends Component<IProps> {
   render() {
     const { label, inputRef, textError, name, handleChangeInput } = this.props;
+
     return (
       <>
-        <LabelName>
+        <LabelDate>
           {label}
           <input
-            type="text"
-            autoComplete="off"
+            type="date"
             ref={inputRef}
             onChange={() => handleChangeInput(`${name}Error`, textError)}
           />
-        </LabelName>
+        </LabelDate>
         {textError !== '' && <ErrorText>{textError}</ErrorText>}
       </>
     );
   }
 }
 
-export default InputName;
+export default InputDate;
 
 export interface IProps {
   label: string;

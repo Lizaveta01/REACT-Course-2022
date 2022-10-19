@@ -1,32 +1,34 @@
 import React, { Component } from 'react';
-import { ErrorText, LabelUploadFile } from './FormComponents.styled';
 
-class InputFile extends Component<IProps> {
+import { ErrorText } from '../Form.styled';
+import { LabelName } from './InputName.styled';
+
+class InputName extends Component<IProps> {
   render() {
-    const { label, imgRef, textError, name, handleChangeInput } = this.props;
+    const { label, inputRef, textError, name, handleChangeInput } = this.props;
 
     return (
       <>
-        <LabelUploadFile>
+        <LabelName>
           {label}
           <input
-            type="file"
-            ref={imgRef}
-            data-tstid="uploadphoto"
+            type="text"
+            autoComplete="off"
+            ref={inputRef}
             onChange={() => handleChangeInput(`${name}Error`, textError)}
           />
-        </LabelUploadFile>
+        </LabelName>
         {textError !== '' && <ErrorText>{textError}</ErrorText>}
       </>
     );
   }
 }
 
-export default InputFile;
+export default InputName;
 
 export interface IProps {
   label: string;
-  imgRef: React.RefObject<HTMLInputElement>;
+  inputRef: React.RefObject<HTMLInputElement>;
   textError: string;
   name: string;
   handleChangeInput: (nameError: string, textError: string) => void;

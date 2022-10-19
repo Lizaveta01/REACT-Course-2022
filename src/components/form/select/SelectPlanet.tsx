@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { ErrorText, LabelPlanet } from './FormComponents.styled';
+
+import { ErrorText } from '../Form.styled';
+import { LabelPlanet } from './SelectPlanet.styled';
 
 class SelectPlanet extends Component<IProps> {
   render() {
     const { label, selectRef, options, textError, name, handleChangeInput } = this.props;
+
     return (
       <>
         <LabelPlanet>

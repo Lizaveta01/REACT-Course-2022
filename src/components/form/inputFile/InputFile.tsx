@@ -1,30 +1,34 @@
 import React, { Component } from 'react';
-import { ErrorText, LabelDate } from './FormComponents.styled';
 
-class InputDate extends Component<IProps> {
+import { ErrorText } from '../Form.styled';
+import { LabelUploadFile } from './InputFiles.styled';
+
+class InputFile extends Component<IProps> {
   render() {
-    const { label, inputRef, textError, name, handleChangeInput } = this.props;
+    const { label, imgRef, textError, name, handleChangeInput } = this.props;
+
     return (
       <>
-        <LabelDate>
+        <LabelUploadFile>
           {label}
           <input
-            type="date"
-            ref={inputRef}
+            type="file"
+            ref={imgRef}
+            data-tstid="uploadphoto"
             onChange={() => handleChangeInput(`${name}Error`, textError)}
           />
-        </LabelDate>
+        </LabelUploadFile>
         {textError !== '' && <ErrorText>{textError}</ErrorText>}
       </>
     );
   }
 }
 
-export default InputDate;
+export default InputFile;
 
 export interface IProps {
   label: string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  imgRef: React.RefObject<HTMLInputElement>;
   textError: string;
   name: string;
   handleChangeInput: (nameError: string, textError: string) => void;

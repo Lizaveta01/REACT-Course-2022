@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import CharService from '../../service/CharService';
-import { IChar } from '../../constants/Interfaces';
+import { IChar } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
 import Char from './Char';
 import { CharListWrapper } from './HomePage.styled';

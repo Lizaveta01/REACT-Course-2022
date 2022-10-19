@@ -2,16 +2,18 @@ import React, { Component } from 'react';
 
 import { planets } from '../../models/planets';
 import { isObjectNotFromEmptyStrings, validationForm } from '../../utils/validation';
-import CheckedNews from './formComponents/CheckedNews';
-import { FormWrapper } from './formComponents/FormComponents.styled';
-import InputDate from './formComponents/InputDate';
-import InputFile from './formComponents/InputFile';
-import InputName from './formComponents/InputName';
-import SelectPlanet from './formComponents/SelectPlanet';
-import Submit from './formComponents/Submit';
-import ToggleSwitch from './formComponents/ToggleSwitch';
+import { FormWrapper } from './Form.styled';
 
-import { InputRefTypes, IProps, IStateErrors, IState } from './types';
+import CheckedNews from './checkbox/CheckedNews';
+import InputDate from './inputDate/InputDate';
+import InputFile from './inputFile/InputFile';
+import InputName from './inputName/InputName';
+import SelectPlanet from './select/SelectPlanet';
+import Submit from './submitButton/Submit';
+import ToggleSwitch from './switcher/ToggleSwitcher';
+
+import { InputRefTypes, IProps, IState } from './types';
+import { Word } from '../../constants/constants';
 
 class Form extends Component<IProps, IState> {
   nameRef = React.createRef<HTMLInputElement>();
@@ -35,7 +37,6 @@ class Form extends Component<IProps, IState> {
   };
 
   handleChangeInput = (inputNameError: string, textError: string) => {
-    console.log('select change');
     if (textError !== '') {
       this.errorChange(inputNameError);
     } else {
@@ -85,19 +86,16 @@ class Form extends Component<IProps, IState> {
       const imgFile = imgValue[0];
       const downFile = URL.createObjectURL(imgFile!);
       const dateBirth = new Date(birthdayValue);
-
       const newCard = {
         id: new Date().getTime(),
         name: nameValue,
         birth: dateBirth.toLocaleDateString(),
         planet: planetValue,
-        species: this.speciesRef.current?.checked ? 'alien' : 'human',
+        species: this.speciesRef.current?.checked ? Word.ALIEN : Word.HUMAN,
         img: downFile,
         news: this.newsRef.current?.checked as boolean,
       };
-
       this.props.addCard(newCard);
-
       this.formRef.current?.reset();
     } else {
       this.setState(validationErrors);

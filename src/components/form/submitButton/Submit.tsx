@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-import { ButtonSubmit } from './FormComponents.styled';
+
+import { ButtonSubmit } from './SubmitButton.styled';
 
 class Submit extends Component<IProps> {
   componentDidMount() {
     const { btnRef } = this.props;
-
     (btnRef.current as HTMLButtonElement).disabled = true;
   }
 
