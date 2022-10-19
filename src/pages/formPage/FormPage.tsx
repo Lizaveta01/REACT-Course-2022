@@ -40,12 +40,12 @@ class FormPage extends Component {
         <Form addCard={this.addCard} />
         <CardList>
           {!!createdCards.length &&
-            createdCards.map((item, index) => {
+            createdCards.map((item: ICreatedCard, index) => {
               return <CreatedCard card={item} key={index} />;
             })}
         </CardList>
         <ModalWindow className={isOpenModalWindow ? 'active' : ''}>
-          <p>Card create successfully!</p>
+          <p>Card was created successfully!</p>
         </ModalWindow>
       </FormPageWrapper>
     );

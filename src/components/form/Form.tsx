@@ -109,7 +109,7 @@ class Form extends Component<IProps, IState> {
     const { nameError, birthdayError, planetError, imgError } = this.state;
 
     return (
-      <FormWrapper onSubmit={this.handleSubmit} ref={this.formRef}>
+      <FormWrapper onSubmit={this.handleSubmit} ref={this.formRef} data-testid="form">
         <InputName
           label="Name:"
           inputRef={this.nameRef}

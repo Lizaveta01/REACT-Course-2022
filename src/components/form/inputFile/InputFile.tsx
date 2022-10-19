@@ -14,7 +14,7 @@ class InputFile extends Component<IProps> {
           <input
             type="file"
             ref={imgRef}
-            data-tstid="uploadphoto"
+            data-testid="upload-photo"
             onChange={() => handleChangeInput(`${name}Error`, textError)}
           />
         </LabelUploadFile>
