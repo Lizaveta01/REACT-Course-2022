@@ -1,30 +1,18 @@
 import React, { ChangeEvent, Component } from 'react';
-import { Input, Label, Switch } from './ToggleSwitch.styled';
+import { Input, Label, Switcher, SwitcherSlider, SwitcherTrack } from './ToggleSwitch.styled';
 
 class ToggleSwitch extends Component<IProps> {
-  state = {
-    checked: false,
-  };
-
-  handleChange = (e: ChangeEvent<HTMLInputElement>) => this.setState({ checked: e.target.checked });
-
   render() {
-    const { checked } = this.state;
     const { label, inputRef } = this.props;
     return (
       <Label>
-        <span>
-          {label}
-          <br />
-          {checked ? 'yes' : 'no'}
-        </span>
-        <Input
-          type="checkbox"
-          ref={inputRef}
-          onChange={this.handleChange}
-          checked={checked}
-        ></Input>
-        <Switch></Switch>
+        {label}
+        <Switcher>
+          <Input type="checkbox" ref={inputRef}></Input>
+          <SwitcherTrack>
+            <SwitcherSlider />
+          </SwitcherTrack>
+        </Switcher>
       </Label>
     );
   }

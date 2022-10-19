@@ -3,11 +3,16 @@ import { Component } from 'react';
 import CreatedCard from '../../components/createdCard/CreatedCard';
 import Form from '../../components/form/Form';
 import { ICreatedCard } from '../../components/form/types';
-import { CardList, FormPageWrapper } from './FormPage.styled';
+import { CardList, FormPageWrapper, ModalWindow } from './FormPage.styled';
 
+interface IPrevState {
+  createdCards: [];
+  isOpenModalWindow: false;
+}
 class FormPage extends Component {
   state = {
     createdCards: [],
+    isOpenModalWindow: false,
   };
 
   addCard = (newCard: ICreatedCard) => {
@@ -15,8 +20,21 @@ class FormPage extends Component {
     localStorage.setItem(`cards`, JSON.stringify(this.state.createdCards));
   };
 
+  closeModalWindow = () => {
+    setTimeout(() => {
+      this.setState({ isOpenModalWindow: false });
+    }, 2000);
+  };
+
+  componentDidUpdate(prevProps: Readonly<never>, prevState: Readonly<IPrevState>) {
+    if (this.state.createdCards !== prevState.createdCards) {
+      this.setState({ isOpenModalWindow: true });
+      this.closeModalWindow();
+    }
+  }
+
   render() {
-    const { createdCards } = this.state;
+    const { createdCards, isOpenModalWindow } = this.state;
     return (
       <FormPageWrapper>
         <Form addCard={this.addCard} />
@@ -26,6 +44,9 @@ class FormPage extends Component {
               return <CreatedCard card={item} key={index} />;
             })}
         </CardList>
+        <ModalWindow className={isOpenModalWindow ? 'active' : ''}>
+          <p>Card create successfully!</p>
+        </ModalWindow>
       </FormPageWrapper>
     );
   }

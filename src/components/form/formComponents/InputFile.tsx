@@ -4,6 +4,7 @@ import { ErrorText, LabelUploadFile } from './FormComponents.styled';
 class InputFile extends Component<IProps> {
   render() {
     const { label, imgRef, textError, name, handleChangeInput } = this.props;
+
     return (
       <>
         <LabelUploadFile>

@@ -20,7 +20,7 @@ function validationBirthday(value: string) {
 }
 
 function validationPlanet(value: string) {
-  return value === '' ? 'Please choose a country' : '';
+  return value === '' ? 'Please choose a planet' : '';
 }
 
 function validationPicture(files: FileList) {
@@ -34,8 +34,8 @@ function validationPicture(files: FileList) {
     return 'Picture should have .png, .jpg or .jpeg extensions';
   }
 
-  if (size > 100000) {
-    return 'Max file size = 100 KB';
+  if (size > 10485760) {
+    return 'Max file size = 10 MB';
   }
 
   return '';

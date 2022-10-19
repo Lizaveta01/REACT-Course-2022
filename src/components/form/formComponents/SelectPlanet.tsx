@@ -13,7 +13,7 @@ class SelectPlanet extends Component<IProps> {
             ref={selectRef}
             onChange={() => handleChangeInput(`${name}Error`, textError)}
           >
-            <option selected>Select planet</option>
+            <option key={-1} disabled></option>
             {options.map((option, index) => (
               <option key={index}>{option}</option>
             ))}

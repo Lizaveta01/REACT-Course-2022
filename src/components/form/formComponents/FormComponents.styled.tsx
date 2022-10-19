@@ -74,11 +74,17 @@ export const ButtonSubmit = styled.button`
   width: 140px;
   height: 40px;
   color: ${Colors.BLACK};
-  background-color: ${Colors.WHITE};
+  background-color: ${Colors.GREEN};
   border-radius: 4px;
   padding-left: 8px;
   padding-right: 8px;
   margin-top: 20px;
+  &:hover {
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  }
+  &:disabled {
+    background-color: ${Colors.GRAY};
+  }
 `;
 export const ErrorText = styled.div`
   font-size: 16px;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Colors } from '../../../styles/constansts';
 
 export const Label = styled.label`
   display: flex;
@@ -7,36 +8,65 @@ export const Label = styled.label`
   cursor: pointer;
   margin: 10px 0px;
 `;
-export const Switch = styled.div`
-  position: relative;
-  width: 60px;
-  height: 28px;
-  background: #b3b3b3;
-  border-radius: 32px;
-  padding: 4px;
-  transition: 300ms all;
 
-  &:before {
-    transition: 300ms all;
-    content: '';
+export const Switcher = styled.label`
+  position: relative;
+  display: block;
+  width: 60px;
+  height: 34px;
+`;
+
+export const SwitcherTrack = styled.div`
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: ${Colors.GRAY};
+  transition: 0.3s;
+  border-radius: 4px;
+  &::before {
     position: absolute;
-    width: 28px;
-    height: 28px;
-    border-radius: 35px;
-    top: 50%;
-    left: 0px;
-    background: white;
-    transform: translate(0, -50%);
+    content: 'Y';
+    color: ${Colors.WHITE};
+    left: 5px;
+    top: 8px;
+    font-size: 18px;
+  }
+  &::after {
+    position: absolute;
+    content: 'N';
+    color: ${Colors.WHITE};
+    right: 10px;
+    top: 8px;
+    font-size: 18px;
   }
 `;
+export const SwitcherSlider = styled.div`
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: ${Colors.WHITE};
+  transition: 0.3s;
+  z-index: 1;
+  border-radius: 4px;
+`;
 export const Input = styled.input`
-  display: none;
+  opacity: 0;
+  width: 0;
+  height: 0;
 
-  &:checked + ${Switch} {
-    background: green;
+  &:checked + ${SwitcherTrack} {
+    background-color: ${Colors.GREEN};
+  }
+  &:checked + ${SwitcherTrack} ${SwitcherSlider} {
+    transform: translateX(26px);
+  }
 
-    &:before {
-      transform: translate(32px, -50%);
-    }
+  &:focus + ${SwitcherTrack} {
+    box-shadow: 3px 3px 3px ${Colors.WHITE};
   }
 `;

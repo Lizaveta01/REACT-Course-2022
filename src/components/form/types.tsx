@@ -19,7 +19,7 @@ export type InputRefTypes = React.RefObject<HTMLInputElement> | React.RefObject<
 export interface IProps {
   addCard: (newCard: ICreatedCard) => void;
 }
-export type State = {
+export type IState = {
   [key in keyof IStateErrors]: string;
 };
 

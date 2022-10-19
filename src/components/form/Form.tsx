@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import { planets } from '../../models/planets';
 import { isObjectNotFromEmptyStrings, validationForm } from '../../utils/validation';
 import CheckedNews from './formComponents/CheckedNews';
@@ -9,7 +10,8 @@ import InputName from './formComponents/InputName';
 import SelectPlanet from './formComponents/SelectPlanet';
 import Submit from './formComponents/Submit';
 import ToggleSwitch from './formComponents/ToggleSwitch';
-import { InputRefTypes, IProps, IStateErrors, State } from './types';
+
+import { InputRefTypes, IProps, IStateErrors, IState } from './types';
 
 class Form extends Component<IProps, IState> {
   nameRef = React.createRef<HTMLInputElement>();
@@ -29,10 +31,11 @@ class Form extends Component<IProps, IState> {
   };
 
   errorChange = (key: string, value = '') => {
-    this.setState({ [key]: value } as State, this.checkSubmitBtn);
+    this.setState({ [key]: value } as IState, this.checkSubmitBtn);
   };
 
   handleChangeInput = (inputNameError: string, textError: string) => {
+    console.log('select change');
     if (textError !== '') {
       this.errorChange(inputNameError);
     } else {
@@ -65,7 +68,7 @@ class Form extends Component<IProps, IState> {
 
   handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(this.nameRef.current?.value);
+
     const nameValue = this.getInputValue(this.nameRef);
     const birthdayValue = this.getInputValue(this.birthdayRef);
     const planetValue = this.getInputValue(this.planetRef);
@@ -77,18 +80,19 @@ class Form extends Component<IProps, IState> {
       planetValue,
       imgValue,
     );
+
     if (isValid) {
-      const dateBirth = new Date(birthdayValue);
       const imgFile = imgValue[0];
-      const file = URL.createObjectURL(imgFile!);
+      const downFile = URL.createObjectURL(imgFile!);
+      const dateBirth = new Date(birthdayValue);
 
       const newCard = {
         id: new Date().getTime(),
         name: nameValue,
         birth: dateBirth.toLocaleDateString(),
         planet: planetValue,
-        species: this.speciesRef.current?.checked ? 'human' : 'alien',
-        img: file,
+        species: this.speciesRef.current?.checked ? 'alien' : 'human',
+        img: downFile,
         news: this.newsRef.current?.checked as boolean,
       };
 
@@ -98,12 +102,13 @@ class Form extends Component<IProps, IState> {
     } else {
       this.setState(validationErrors);
     }
-    // this.btnRef.current!.disabled = true;
+
+    this.btnRef.current!.disabled = true;
     this.nameRef.current!.focus();
   };
 
   render() {
-    const { nameError, birthdayError, palentError, imgError } = this.state;
+    const { nameError, birthdayError, planetError, imgError } = this.state;
 
     return (
       <FormWrapper onSubmit={this.handleSubmit} ref={this.formRef}>
@@ -125,8 +130,8 @@ class Form extends Component<IProps, IState> {
           label="Planet:"
           selectRef={this.planetRef}
           options={planets}
-          textError={palentError}
-          name="palent"
+          textError={planetError}
+          name="planet"
           handleChangeInput={this.handleChangeInput}
         />
         <ToggleSwitch label="Are you a human?" inputRef={this.speciesRef} />
@@ -134,7 +139,7 @@ class Form extends Component<IProps, IState> {
           label="Upload file:"
           imgRef={this.imgRef}
           textError={imgError}
-          name="name"
+          name="img"
           handleChangeInput={this.handleChangeInput}
         />
         <CheckedNews label="I want to receive news" inputRef={this.newsRef} />
