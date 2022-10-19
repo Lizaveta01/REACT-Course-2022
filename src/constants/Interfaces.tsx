@@ -9,3 +9,14 @@ export interface IChar {
   };
   image: string;
 }
+
+export enum Words {
+  SEARCH = 'search',
+  ALIVE = 'Alive',
+  DEAD = 'Dead',
+}
+
+export enum ClassCSS {
+  ACTIVE = 'active',
+  DEAD = 'dead',
+}

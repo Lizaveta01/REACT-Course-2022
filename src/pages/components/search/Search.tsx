@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
+import { Words } from '../../../constants/Interfaces';
 
 import { ButtonSearch, FormWrapper, InputSearch } from './Search.styled';
 
 class Search extends Component {
   state = {
-    searchValue: `${localStorage.getItem('search')}`,
+    searchValue: `${localStorage.getItem(Words.SEARCH)}`,
   };
 
   componentWillUnmount() {
-    console.log('delete');
-    localStorage.setItem('search', `${this.state.searchValue}`);
+    localStorage.setItem(Words.SEARCH, `${this.state.searchValue}`);
   }
 
   render() {
