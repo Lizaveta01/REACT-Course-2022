@@ -8,7 +8,6 @@ class Search extends Component {
   };
 
   componentWillUnmount() {
-    console.log('delete');
     localStorage.setItem('search', `${this.state.searchValue}`);
   }
 
