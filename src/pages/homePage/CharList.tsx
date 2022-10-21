@@ -6,9 +6,8 @@ import Spinner from '../../components/spinner/Spinner';
 import Char from './Char';
 import { CharListWrapper } from './HomePage.styled';
 
-class CharList extends Component {
+class CharList extends Component<IProps> {
   state = {
-    charList: [],
     loading: true,
     error: false,
   };
@@ -16,7 +15,9 @@ class CharList extends Component {
   charService = new CharService();
 
   componentDidMount() {
-    this.onRequest();
+    if (this.props.charList.length === 0) {
+      this.onRequest();
+    }
   }
   onCharListLoaded = (newCharList: IChar[]) => {
     this.setState({ charList: newCharList, loading: false });
@@ -27,7 +28,6 @@ class CharList extends Component {
   onRequest = () => {
     this.charService.getAllCharacters().then(this.onCharListLoaded).catch(this.onError);
   };
-  
 
   renderItems = (arr: IChar[]) => {
     const items = arr.map((item: IChar) => {
@@ -46,3 +46,8 @@ class CharList extends Component {
 }
 
 export default CharList;
+
+export interface IProps {
+  search: string;
+  charList: IChar[] | [];
+}

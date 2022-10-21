@@ -8,19 +8,19 @@ import { HomePageWrapper } from './HomePage.styled';
 
 class HomePage extends Component {
   state = {
-    reach: '',
-
+    search: '',
+    charList: [],
   };
 
   setSearch(value: string) {
     this.setState({ search: value });
   }
   render() {
-    const { search } = this.state;
+    const { search, charList } = this.state;
     return (
       <HomePageWrapper>
         <Search search={search} setSearch={(value: string) => this.setSearch(value)} />
-        <CharList search={search} charList={}/>
+        <CharList search={search} charList={charList}/>
       </HomePageWrapper>
     );
   }
