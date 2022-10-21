@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { IChar } from '../../constants/constants';
+import IconPlanetImage from '../../assets/Planet.svg';
+import IconGenderImage from '../../assets/Gender.svg';
+import IconSpeciesImage from '../../assets/Alien.svg';
+
+import { ClassCSS, IChar, Word } from '../../constants/constants';
+
 import {
   CharItem,
   ButtonAddFavorite,
@@ -9,12 +14,8 @@ import {
   AboutChar,
   ItemName,
   ItemStatus,
-  ItemGender,
-  ItemSpecies,
-  ItemPlanet,
-  IconGender,
-  IconSpecies,
-  IconPlanet,
+  IconDiv,
+  ItemContainer,
   AboutCharAddit,
 } from './HomePage.styled';
 
@@ -24,36 +25,56 @@ type props = {
 };
 
 const Char = ({ char }: props) => {
+  const { image, name, origin, gender, species } = char;
+
+  const aboutCharInfo = [
+    {
+      id: 11231,
+      info: gender,
+      icon: IconGenderImage,
+    },
+    {
+      id: 11232,
+      info: species,
+      icon: IconSpeciesImage,
+    },
+    {
+      id: 11233,
+      info: origin.name.split(' ')[0],
+      icon: IconPlanetImage,
+    },
+  ];
+
   return (
     <CharItem data-testid="char-item">
       <ButtonAddFavorite />
       <ItemImageDiv>
-        <img src={char.image} alt="char-image" />
+        <img src={image} alt="char-image" />
       </ItemImageDiv>
       <ItemInfoDiv>
         <AboutChar>
-          <ItemName>
-            {char.name.split(' ').length > 2 ? char.name.split(' ')[0] : char.name}
-          </ItemName>
+          <ItemName>{name.split(' ').length > 2 ? name.split(' ')[0] : name}</ItemName>
           <ItemStatus
-            className={char.status === 'Alive' ? 'active' : char.status === 'Dead' ? 'dead' : ''}
+            className={
+              char.status === Word.ALIVE
+                ? ClassCSS.ACTIVE
+                : char.status === Word.DEAD
+                ? ClassCSS.DEAD
+                : ''
+            }
           >
             {char.status}
           </ItemStatus>
         </AboutChar>
         <AboutCharAddit>
-          <ItemGender>
-            <IconGender />
-            <p>{char.gender}</p>
-          </ItemGender>
-          <ItemSpecies>
-            <IconSpecies />
-            <p>{char.species}</p>
-          </ItemSpecies>
-          <ItemPlanet>
-            <IconPlanet />
-            <p>{char.origin.name.split(' ')[0]}</p>
-          </ItemPlanet>
+          {aboutCharInfo.map((item) => {
+            return (
+              <ItemContainer key={item.id}>
+                <IconDiv style={{ backgroundImage: `url(${item.icon})` }} />
+                <p>{item.info}</p>
+              </ItemContainer>
+            );
+          })}
         </AboutCharAddit>
       </ItemInfoDiv>
     </CharItem>

@@ -1,7 +1,9 @@
 export enum Word {
   ALIEN = 'alien',
   HUMAN = 'human',
-  ACTIVE = 'active',
+  SEARCH = 'search',
+  ALIVE = 'Alive',
+  DEAD = 'Dead',
 }
 
 export interface IChar {
@@ -14,4 +16,9 @@ export interface IChar {
     name: string;
   };
   image: string;
+}
+
+export enum ClassCSS {
+  ACTIVE = 'active',
+  DEAD = 'dead',
 }
