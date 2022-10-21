@@ -28,14 +28,17 @@ const Char = ({ char }: props) => {
 
   const aboutCharInfo = [
     {
+      id: 11231,
       info: gender,
       icon: IconGenderImage,
     },
     {
+      id: 11232,
       info: species,
       icon: IconSpeciesImage,
     },
     {
+      id: 11233,
       info: origin.name.split(' ')[0],
       icon: IconPlanetImage,
     },
@@ -63,9 +66,9 @@ const Char = ({ char }: props) => {
           </ItemStatus>
         </AboutChar>
         <AboutCharAddit>
-          {aboutCharInfo.map((item, index) => {
+          {aboutCharInfo.map((item) => {
             return (
-              <ItemContainer key={index}>
+              <ItemContainer key={item.id}>
                 <IconDiv style={{ backgroundImage: `url(${item.icon})` }} />
                 <p>{item.info}</p>
               </ItemContainer>

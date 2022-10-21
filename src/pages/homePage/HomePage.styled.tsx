@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 import { Colors } from '../../styles/constansts';
-import IconPlanetImage from '../../assets/Planet.svg';
-import IconGenderImage from '../../assets/Gender.svg';
-import IconSpeciesImage from '../../assets/Alien.svg';
 import IconHeart from '../../assets/Heart.svg';
 
 export const HomePageWrapper = styled.div`
