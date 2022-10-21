@@ -27,6 +27,7 @@ class CharList extends Component {
   onRequest = () => {
     this.charService.getAllCharacters().then(this.onCharListLoaded).catch(this.onError);
   };
+  
 
   renderItems = (arr: IChar[]) => {
     const items = arr.map((item: IChar) => {
@@ -37,6 +38,7 @@ class CharList extends Component {
 
   render() {
     const { charList, loading } = this.state;
+
     const items = this.renderItems(charList);
 
     return <CharListWrapper>{loading ? <Spinner /> : items}</CharListWrapper>;
