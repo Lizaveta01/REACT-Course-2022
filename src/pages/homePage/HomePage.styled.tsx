@@ -1,9 +1,6 @@
 import styled from 'styled-components';
 
 import { Colors } from '../../styles/constansts';
-import IconPlanetImage from '../../assets/Planet.svg';
-import IconGenderImage from '../../assets/Gender.svg';
-import IconSpeciesImage from '../../assets/Alien.svg';
 import IconHeart from '../../assets/Heart.svg';
 
 export const HomePageWrapper = styled.div`
@@ -84,21 +81,15 @@ export const ItemStatus = styled.p`
     color: ${Colors.GREEN};
   }
 `;
-export const ItemGender = styled.div``;
-export const ItemSpecies = styled.div``;
-export const ItemPlanet = styled.div``;
-const IconDiv = styled.div`
+export const ItemContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+export const IconDiv = styled.div`
   width: 50px;
   height: 50px;
   background-repeat: no-repeat;
   margin-bottom: 10px;
-`;
-export const IconGender = styled(IconDiv)`
-  background-image: url(${IconGenderImage});
-`;
-export const IconSpecies = styled(IconDiv)`
-  background-image: url(${IconSpeciesImage});
-`;
-export const IconPlanet = styled(IconDiv)`
-  background-image: url(${IconPlanetImage});
 `;
