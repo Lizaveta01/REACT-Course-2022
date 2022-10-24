@@ -1,10 +1,8 @@
 import styled from 'styled-components';
-import IconSpeciesImage from '../../assets/Alien.svg';
-import IconPlanetImage from '../../assets/Planet.svg';
-import IconNewsImage from '../../assets/News.svg';
-import IconBirthdayImage from '../../assets/Birthday.svg';
 
+import IconNewsImage from '../../assets/News.svg';
 import { Colors } from '../../styles/constansts';
+
 export const CardItem = styled.div`
   display: flex;
   align-items: center;
@@ -18,13 +16,11 @@ export const CardItem = styled.div`
   padding: 20px;
   position: relative;
 `;
-
 export const Name = styled.p`
   align-self: center;
   font-size: 22px;
   font-weight: 500;
 `;
-
 export const BlockContainer = styled.div`
   display: flex;
   align-items: center;
@@ -34,23 +30,13 @@ export const BlockContainer = styled.div`
     font-size: 16px;
   }
 `;
-export const SpeciesIcon = styled.div`
+export const IconDiv = styled.div`
   width: 26px;
   height: 26px;
   background-repeat: no-repeat;
-  background-image: url(${IconSpeciesImage});
   background-size: cover;
-  &.active {
-    background-image: url(${IconSpeciesImage});
-  }
 `;
-export const PlanetIcon = styled(SpeciesIcon)`
-  background-image: url(${IconPlanetImage});
-`;
-export const BirthIcon = styled(SpeciesIcon)`
-  background-image: url(${IconBirthdayImage});
-`;
-export const NewsIcon = styled(SpeciesIcon)`
+export const NewsIcon = styled(IconDiv)`
   position: absolute;
   top: 15px;
   right: 15px;

@@ -4,12 +4,13 @@ import CharList from './CharList';
 import { Component } from 'react';
 import Search from '../../components/search/Search';
 import { HomePageWrapper } from './HomePage.styled';
-import { IChar } from '../../constants/constants';
+import { IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
 import CharService from '../../service/CharService';
+
 class HomePage extends Component {
   state = {
-    search: localStorage.getItem('search') || '',
+    search: localStorage.getItem(Word.SEARCH) || '',
     charList: [],
     loading: true,
     error: false,
@@ -25,7 +26,7 @@ class HomePage extends Component {
     this.initSearch();
   }
   componentWillUnmount() {
-    localStorage.setItem('search', `${this.state.search}`);
+    localStorage.setItem(Word.SEARCH, `${this.state.search}`);
   }
 
   changeSearch(searchValue: string) {
@@ -53,7 +54,7 @@ class HomePage extends Component {
   }
 
   handleKeyDown = (event: React.KeyboardEvent) => {
-    if (event.key === 'Enter') {
+    if (event.key === Word.ENTER) {
       this.onRequest();
     }
   };

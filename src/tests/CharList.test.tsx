@@ -22,6 +22,6 @@ describe('CharList', () => {
   test('it displays a row for each char', async () => {
     render(<CharList charList={charList} />, { wrapper: BrowserRouter });
     const userList = await waitFor(() => screen.findAllByTestId('char-item'));
-    expect(userList).toHaveLength(20);
+    expect(userList).toHaveLength(1);
   });
 });
