@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { Colors } from '../../styles/constansts';
 import IconSearch from '../../assets/Search.svg';
 
-export const FormWrapper = styled.form`
+export const FormWrapper = styled.div`
   width: auto;
   position: relative;
   margin-top: 20px;

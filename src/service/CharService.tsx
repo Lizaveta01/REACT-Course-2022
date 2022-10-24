@@ -9,14 +9,16 @@ class CharService {
     return await res.json();
   };
 
-  getAllCharacters = async () => {
-    const res = await this.getResourse(`${this._apiBase}/character/?page=1`);
+  getAllCharacters = async (page = 0, name = '', status = '', gender = '', species = '') => {
+    const res = await this.getResourse(
+      `${this._apiBase}/character/?page=${page}&name=${name}&status=${status}&gender=${gender}&species=${species}`,
+    );
     console.log(res.results);
     return res.results;
   };
 
-  getCharacter = async (id: number) => {
-    const res = await this.getResourse(`${this._apiBase}/character/${id}`);
+  getCharacter = async (searchValue: string) => {
+    const res = await this.getResourse(`${this._apiBase}/character/?name=${searchValue}`);
     return res;
   };
 }
