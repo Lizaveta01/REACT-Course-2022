@@ -41,10 +41,13 @@ class ModalWindow extends Component<IProps> {
     ];
 
     return (
-      <ModalWrapper>
+      <ModalWrapper data-testid="modal-window">
         <Container>
-          <ButtonClose onClick={this.handleCloseWindow} />
-          <ImgContainer style={{ backgroundImage: `url(${card.image})` }} />
+          <ButtonClose onClick={this.handleCloseWindow} data-testid="button-modal-window" />
+          <ImgContainer
+            style={{ backgroundImage: `url(${card.image})` }}
+            data-testid="modal-image"
+          />
           <Info>
             {data.map((item) => {
               return (

@@ -42,7 +42,6 @@ class HomePage extends Component {
   };
 
   onRequest = () => {
-    console.log(this.state.search);
     this.charService
       .getAllCharacters(this.state.page, this.state.search)
       .then(this.onCharListLoaded)
@@ -75,7 +74,7 @@ class HomePage extends Component {
             {!!charList.length ? (
               <CharList charList={charList} />
             ) : (
-              <p> Sorry, this character is not found</p>
+              <p>Sorry, this character is not found</p>
             )}
           </>
         )}

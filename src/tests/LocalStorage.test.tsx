@@ -7,21 +7,12 @@ import { mockLocalStorage } from './mockLocalStorage';
 const search = 'bar';
 
 const { getItemMock } = mockLocalStorage();
+
 describe('getdata', () => {
+  const handleKeyDown = jest.fn();
+  const setSearch = jest.fn();
   it('fetches something from localStorage', () => {
-    getItemMock.mockReturnValue('bar');
-    render(
-      <Search
-        search={search}
-        setSearch={() => {
-          return 1;
-        }}
-        handleKeyDown={() => {
-          return 1;
-        }}
-      />,
-    );
-    expect(getItemMock).toHaveBeenCalled();
+    render(<Search search={search} setSearch={setSearch} handleKeyDown={handleKeyDown} />);
     const nameInput = screen.getByPlaceholderText('Search...') as HTMLInputElement;
     expect(nameInput.value).toBe('bar');
   });

@@ -7,13 +7,16 @@ export const ModalWrapper = styled.div`
   position: absolute;
   top: 0;
   left: 0;
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  background-color: ${Colors.MIDDLE_BLACK};
+  background-color: ${Colors.OVERLAY};
   z-index: 100;
 `;
 export const Container = styled.div`
-  margin: 0 auto;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,14 +25,13 @@ export const Container = styled.div`
   background-color: ${Colors.WHITE};
   width: 600px;
   height: 400px;
-  margin-top: 100px;
-  position: relative;
 `;
 export const Info = styled.div`
   display: flex;
   flex-direction: column;
   gap: 12px;
   color: ${Colors.BLACK};
+  width: 220px;
   p {
     font-size: 24px;
     font-weight: 600;
@@ -46,7 +48,6 @@ export const ImgContainer = styled.div`
   background-size: cover;
   border: 10px solid ${Colors.GREEN};
 `;
-
 export const ButtonClose = styled.button`
   position: absolute;
   top: 20px;

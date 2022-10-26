@@ -31,6 +31,10 @@ export const CharItem = styled.li`
   width: 300px;
   height: 460px;
   border-radius: 8px;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 9px 10px 14px 1px ${Colors.CARD_HOVER_GREEN};
+  }
 `;
 export const ButtonAddFavorite = styled.button`
   position: absolute;
