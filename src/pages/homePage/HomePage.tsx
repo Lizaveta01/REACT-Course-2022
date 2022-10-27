@@ -1,86 +1,78 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CharList from './CharList';
-import { Component } from 'react';
+
 import Search from '../../components/search/Search';
 import { HomePageWrapper } from './HomePage.styled';
 import { IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
-import CharService from '../../service/CharService';
+import { getAllCharacters } from '../../service/CharService';
 
-class HomePage extends Component {
-  state = {
-    search: localStorage.getItem(Word.SEARCH) || '',
-    charList: [],
-    loading: true,
-    error: false,
-    page: 1,
+const HomePage = () => {
+  const [search, setSearch] = useState(localStorage.getItem(Word.SEARCH) || '');
+  const [charList, setCharList] = useState<IChar[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+  const [page, setPage] = useState(1);
+
+  const initSearch = () => {
+    onRequest();
+  };
+  useEffect(() => {
+    initSearch();
+    return () => {
+      localStorage.setItem(Word.SEARCH, `${search}`);
+    };
+  }, []);
+
+  const changeSearch = (searchValue: string) => {
+    setSearch(searchValue);
   };
 
-  charService = new CharService();
-
-  initSearch() {
-    this.onRequest();
-  }
-  componentDidMount() {
-    this.initSearch();
-  }
-  componentWillUnmount() {
-    localStorage.setItem(Word.SEARCH, `${this.state.search}`);
-  }
-
-  changeSearch(searchValue: string) {
-    this.setState({ search: searchValue });
-  }
-
-  onCharListLoaded = (newCharList: IChar[]) => {
-    this.setState({ charList: newCharList, loading: false });
+  const onCharListLoaded = (newCharList: IChar[]) => {
+    setCharList(newCharList);
+    setLoading(false);
   };
 
-  onError = () => {
-    this.setState({ loading: false, error: true });
+  const onError = () => {
+    setError(true);
+    setLoading(false);
   };
 
-  onRequest = () => {
-    this.charService
-      .getAllCharacters(this.state.page, this.state.search)
-      .then(this.onCharListLoaded)
-      .catch(this.onError);
+  const onRequest = () => {
+    getAllCharacters(page, search).then(onCharListLoaded).catch(onError);
   };
 
-  setCards(cards: IChar[]) {
-    this.setState({ charList: cards });
-  }
+  // const setCards = (cards: IChar[]) => {
+  //   setCharList(cards);
+  // };
 
-  handleKeyDown = (event: React.KeyboardEvent) => {
+  const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === Word.ENTER) {
-      this.onRequest();
+      onRequest();
     }
   };
 
-  render() {
-    const { search, charList, loading } = this.state;
-    return (
-      <HomePageWrapper>
-        <Search
-          search={search}
-          setSearch={(value: string) => this.changeSearch(value)}
-          handleKeyDown={this.handleKeyDown}
-        />
-        {loading ? (
-          <Spinner />
-        ) : (
-          <>
-            {!!charList.length ? (
-              <CharList charList={charList} />
-            ) : (
-              <p>Sorry, this character is not found</p>
-            )}
-          </>
-        )}
-      </HomePageWrapper>
-    );
-  }
-}
+  return (
+    <HomePageWrapper>
+      <Search
+        search={search}
+        setSearch={(value: string) => changeSearch(value)}
+        handleKeyDown={handleKeyDown}
+      />
+      {loading ? (
+        <Spinner />
+      ) : (
+        <>
+          {!!charList.length ? (
+            <CharList charList={charList} />
+          ) : (
+            <p>Sorry, this character is not found</p>
+          )}
+        </>
+      )}
+    </HomePageWrapper>
+  );
+};
 
 export default HomePage;
