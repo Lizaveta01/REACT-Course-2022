@@ -49,6 +49,7 @@ export const ImgContainer = styled.div`
   border: 10px solid ${Colors.GREEN};
 `;
 export const ButtonClose = styled.button`
+  cursor: pointer;
   position: absolute;
   top: 20px;
   right: 20px;

@@ -12,7 +12,6 @@ class CharService {
     const res = await this.getResourse(
       `${this._apiBase}/character/?page=${page}&name=${name}&status=${status}&gender=${gender}&species=${species}`,
     );
-    console.log(res);
     return res;
   };
 }
