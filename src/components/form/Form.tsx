@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState } from 'react';
 
 import { planets } from '../../models/planets';
 import { isObjectNotFromEmptyStrings, validationForm } from '../../utils/validation';
@@ -15,65 +15,63 @@ import ToggleSwitch from './switcher/ToggleSwitcher';
 import { InputRefTypes, IProps, IState } from './types';
 import { Word } from '../../constants/constants';
 
-class Form extends Component<IProps, IState> {
-  nameRef = React.createRef<HTMLInputElement>();
-  birthdayRef = React.createRef<HTMLInputElement>();
-  planetRef = React.createRef<HTMLSelectElement>();
-  newsRef = React.createRef<HTMLInputElement>();
-  speciesRef = React.createRef<HTMLInputElement>();
-  imgRef = React.createRef<HTMLInputElement>();
-  btnRef = React.createRef<HTMLButtonElement>();
-  formRef = React.createRef<HTMLFormElement>();
+const Form = ({ addCard }: IProps) => {
+  const nameRef = React.createRef<HTMLInputElement>();
+  const birthdayRef = React.createRef<HTMLInputElement>();
+  const planetRef = React.createRef<HTMLSelectElement>();
+  const newsRef = React.createRef<HTMLInputElement>();
+  const speciesRef = React.createRef<HTMLInputElement>();
+  const imgRef = React.createRef<HTMLInputElement>();
+  const btnRef = React.createRef<HTMLButtonElement>();
+  const formRef = React.createRef<HTMLFormElement>();
 
-  state = {
-    nameError: '',
-    birthdayError: '',
-    planetError: '',
-    imgError: '',
+  const [nameError, setNameError] = useState('');
+  const [birthdayError, setBirthdayError] = useState('');
+  const [planetError, setPlanetError] = useState('');
+  const [imgError, setImgError] = useState('');
+
+  const errorChange = (key: string, value = '') => {
+    this.setState({ [key]: value } as IState, checkSubmitBtn);
   };
 
-  errorChange = (key: string, value = '') => {
-    this.setState({ [key]: value } as IState, this.checkSubmitBtn);
-  };
-
-  handleChangeInput = (inputNameError: string, textError: string) => {
+  const handleChangeInput = (inputNameError: string, textError: string) => {
     if (textError !== '') {
-      this.errorChange(inputNameError);
+      errorChange(inputNameError);
     } else {
-      this.checkSubmitBtn();
+      checkSubmitBtn();
     }
   };
 
-  checkSubmitBtn = () => {
+  const checkSubmitBtn = () => {
     const isHasErrors = isObjectNotFromEmptyStrings(this.state);
     let isEmpty = true;
     if (
-      this.getInputValue(this.nameRef) !== '' ||
-      this.getInputValue(this.birthdayRef) !== '' ||
-      this.getInputValue(this.planetRef) !== '' ||
-      this.imgRef.current!.files?.length !== 0
+      getInputValue(nameRef) !== '' ||
+      getInputValue(birthdayRef) !== '' ||
+      getInputValue(planetRef) !== '' ||
+      imgRef.current!.files?.length !== 0
     ) {
       isEmpty = false;
     }
 
     if (isHasErrors || isEmpty) {
-      (this.btnRef.current as HTMLButtonElement).disabled = true;
+      (btnRef.current as HTMLButtonElement).disabled = true;
     } else {
-      (this.btnRef.current as HTMLButtonElement).disabled = false;
+      (btnRef.current as HTMLButtonElement).disabled = false;
     }
   };
 
-  getInputValue = (inputRef: InputRefTypes): string => {
+  const getInputValue = (inputRef: InputRefTypes): string => {
     return inputRef.current?.value as string;
   };
 
-  handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const nameValue = this.getInputValue(this.nameRef);
-    const birthdayValue = this.getInputValue(this.birthdayRef);
-    const planetValue = this.getInputValue(this.planetRef);
-    const imgValue = this.imgRef.current?.files as FileList;
+    const nameValue = getInputValue(nameRef);
+    const birthdayValue = getInputValue(birthdayRef);
+    const planetValue = getInputValue(planetRef);
+    const imgValue = imgRef.current?.files as FileList;
 
     const { isValid, validationErrors } = validationForm(
       nameValue,
@@ -91,59 +89,55 @@ class Form extends Component<IProps, IState> {
         name: nameValue,
         birth: dateBirth.toLocaleDateString(),
         planet: planetValue,
-        species: this.speciesRef.current?.checked ? Word.ALIEN : Word.HUMAN,
+        species: speciesRef.current?.checked ? Word.ALIEN : Word.HUMAN,
         img: downFile,
-        news: this.newsRef.current?.checked as boolean,
+        news: newsRef.current?.checked as boolean,
       };
-      this.props.addCard(newCard);
-      this.formRef.current?.reset();
+      addCard(newCard);
+      formRef.current?.reset();
     } else {
-      this.setState(validationErrors);
+      setState(validationErrors);
     }
 
-    this.btnRef.current!.disabled = true;
-    this.nameRef.current!.focus();
+    btnRef.current!.disabled = true;
+    nameRef.current!.focus();
   };
 
-  render() {
-    const { nameError, birthdayError, planetError, imgError } = this.state;
-
-    return (
-      <FormWrapper onSubmit={this.handleSubmit} ref={this.formRef} data-testid="form">
-        <InputName
-          label="Name:"
-          inputRef={this.nameRef}
-          textError={nameError}
-          name="name"
-          handleChangeInput={this.handleChangeInput}
-        />
-        <InputDate
-          label="BirthDay:"
-          inputRef={this.birthdayRef}
-          textError={birthdayError}
-          name="birthday"
-          handleChangeInput={this.handleChangeInput}
-        />
-        <SelectPlanet
-          label="Planet:"
-          selectRef={this.planetRef}
-          options={planets}
-          textError={planetError}
-          name="planet"
-          handleChangeInput={this.handleChangeInput}
-        />
-        <ToggleSwitch label="Are you a human?" inputRef={this.speciesRef} />
-        <InputFile
-          label="Upload file:"
-          imgRef={this.imgRef}
-          textError={imgError}
-          name="img"
-          handleChangeInput={this.handleChangeInput}
-        />
-        <CheckedNews label="I want to receive news" inputRef={this.newsRef} />
-        <Submit label="Submit" btnRef={this.btnRef} />
-      </FormWrapper>
-    );
-  }
-}
+  return (
+    <FormWrapper onSubmit={handleSubmit} ref={formRef} data-testid="form">
+      <InputName
+        label="Name:"
+        inputRef={nameRef}
+        textError={nameError}
+        name="name"
+        handleChangeInput={handleChangeInput}
+      />
+      <InputDate
+        label="BirthDay:"
+        inputRef={birthdayRef}
+        textError={birthdayError}
+        name="birthday"
+        handleChangeInput={handleChangeInput}
+      />
+      <SelectPlanet
+        label="Planet:"
+        selectRef={planetRef}
+        options={planets}
+        textError={planetError}
+        name="planet"
+        handleChangeInput={handleChangeInput}
+      />
+      <ToggleSwitch label="Are you a human?" inputRef={speciesRef} />
+      <InputFile
+        label="Upload file:"
+        imgRef={imgRef}
+        textError={imgError}
+        name="img"
+        handleChangeInput={handleChangeInput}
+      />
+      <CheckedNews label="I want to receive news" inputRef={newsRef} />
+      <Submit label="Submit" btnRef={btnRef} />
+    </FormWrapper>
+  );
+};
 export default Form;

@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
 
-import CharList from './CharList';
-
-import Search from '../../components/search/Search';
+import { CharList } from './CharList';
+import { Search } from '../../components/search/Search';
 import { HomePageWrapper } from './HomePage.styled';
 import { IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
 import { getAllCharacters } from '../../service/CharService';
 
-const HomePage = () => {
+export const HomePage = () => {
   const [search, setSearch] = useState(localStorage.getItem(Word.SEARCH) || '');
   const [charList, setCharList] = useState<IChar[]>([]);
   const [loading, setLoading] = useState(true);
@@ -43,10 +42,6 @@ const HomePage = () => {
     getAllCharacters(page, search).then(onCharListLoaded).catch(onError);
   };
 
-  // const setCards = (cards: IChar[]) => {
-  //   setCharList(cards);
-  // };
-
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === Word.ENTER) {
       onRequest();
@@ -74,5 +69,3 @@ const HomePage = () => {
     </HomePageWrapper>
   );
 };
-
-export default HomePage;

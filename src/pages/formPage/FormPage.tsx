@@ -1,5 +1,4 @@
-import React from 'react';
-import { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import CreatedCard from '../../components/createdCard/CreatedCard';
 import Form from '../../components/form/Form';
@@ -7,50 +6,39 @@ import { ICreatedCard } from '../../components/form/types';
 import { ClassCSS } from '../../constants/constants';
 import { CardList, FormPageWrapper, ModalWindow } from './FormPage.styled';
 
-interface IPrevState {
-  createdCards: [];
-  isOpenModalWindow: false;
-}
-class FormPage extends Component {
-  state = {
-    createdCards: [],
-    isOpenModalWindow: false,
+export const FormPage = () => {
+  const [createdCards, setCreatedCards] = useState<ICreatedCard[]>([]);
+  const [isOpenModalWindow, setIsOpenModalWindow] = useState(false);
+
+  const addCard = (newCard: ICreatedCard) => {
+    setCreatedCards([...createdCards, newCard]);
   };
 
-  addCard = (newCard: ICreatedCard) => {
-    this.setState({ createdCards: [...this.state.createdCards, newCard] });
-  };
-
-  closeModalWindow = () => {
+  const closeModalWindow = () => {
     setTimeout(() => {
-      this.setState({ isOpenModalWindow: false });
+      setIsOpenModalWindow(false);
     }, 2000);
   };
 
-  componentDidUpdate(prevProps: Readonly<never>, prevState: Readonly<IPrevState>) {
-    if (this.state.createdCards !== prevState.createdCards) {
-      this.setState({ isOpenModalWindow: true });
-      this.closeModalWindow();
-    }
-  }
+  useEffect(() => {
+    setIsOpenModalWindow(true);
+    closeModalWindow();
+  }, [createdCards]);
 
-  render() {
-    const { createdCards, isOpenModalWindow } = this.state;
-    return (
-      <FormPageWrapper>
-        <Form addCard={this.addCard} />
-        <CardList>
-          {!!createdCards.length &&
-            createdCards.map((item: ICreatedCard, index) => {
-              return <CreatedCard card={item} key={index} />;
-            })}
-        </CardList>
-        <ModalWindow className={isOpenModalWindow ? ClassCSS.ACTIVE : ''}>
-          <p>Card was created successfully!</p>
-        </ModalWindow>
-      </FormPageWrapper>
-    );
-  }
-}
+  return (
+    <FormPageWrapper>
+      <Form addCard={addCard} />
+      <CardList>
+        {!!createdCards.length &&
+          createdCards.map((item: ICreatedCard, index) => {
+            return <CreatedCard card={item} key={index} />;
+          })}
+      </CardList>
+      <ModalWindow className={isOpenModalWindow ? ClassCSS.ACTIVE : ''}>
+        <p>Card was created successfully!</p>
+      </ModalWindow>
+    </FormPageWrapper>
+  );
+};
 
 export default FormPage;
