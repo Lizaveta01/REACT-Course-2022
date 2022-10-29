@@ -1,40 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { validationPlanet } from '../../../utils/validation';
 
 import { ErrorText } from '../Form.styled';
+import { IPropsComponent } from '../types';
 import { LabelPlanet } from './SelectPlanet.styled';
 
-class SelectPlanet extends Component<IProps> {
-  render() {
-    const { label, selectRef, options, textError, name, handleChangeInput } = this.props;
-
-    return (
-      <>
-        <LabelPlanet>
-          {label}
-          <select
-            defaultValue=""
-            ref={selectRef}
-            onChange={() => handleChangeInput(`${name}Error`, textError)}
-          >
-            <option key={-1} disabled></option>
-            {options.map((option, index) => (
-              <option key={index}>{option}</option>
-            ))}
-          </select>
-        </LabelPlanet>
-        {textError !== '' && <ErrorText>{textError}</ErrorText>}
-      </>
-    );
-  }
-}
+const SelectPlanet = ({ label, options, textError, name, register }: IPropsComponent) => {
+  return (
+    <>
+      <LabelPlanet>
+        {label}
+        <select
+          defaultValue=""
+          {...register(name, {
+            validate: (value) => validationPlanet(value as string),
+          })}
+        >
+          <option key={-1} disabled></option>
+          {options!.map((option: string, index: number) => (
+            <option key={index}>{option}</option>
+          ))}
+        </select>
+      </LabelPlanet>
+      {textError !== '' && <ErrorText>{textError}</ErrorText>}
+    </>
+  );
+};
 
 export default SelectPlanet;
-
-export interface IProps {
-  label: string;
-  selectRef: React.RefObject<HTMLSelectElement>;
-  options: string[];
-  textError: string;
-  name: string;
-  handleChangeInput: (nameError: string, textError: string) => void;
-}

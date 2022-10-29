@@ -1,28 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { IFormData, Name } from '../types';
+import { UseFormRegister } from 'react-hook-form';
 
 import { Input, Label, Switcher, SwitcherSlider, SwitcherTrack } from './ToggleSwitcher.styled';
 
-class ToggleSwitch extends Component<IProps> {
-  render() {
-    const { label, inputRef } = this.props;
-
-    return (
-      <Label>
-        {label}
-        <Switcher>
-          <Input type="checkbox" ref={inputRef}></Input>
-          <SwitcherTrack>
-            <SwitcherSlider />
-          </SwitcherTrack>
-        </Switcher>
-      </Label>
-    );
-  }
-}
+const ToggleSwitch = ({ label, name, register }: IProps) => {
+  return (
+    <Label>
+      {label}
+      <Switcher>
+        <Input type="checkbox" {...register(name)}></Input>
+        <SwitcherTrack>
+          <SwitcherSlider />
+        </SwitcherTrack>
+      </Switcher>
+    </Label>
+  );
+};
 
 export default ToggleSwitch;
 
 export interface IProps {
   label: string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  name: Name;
+  register: UseFormRegister<IFormData>;
 }

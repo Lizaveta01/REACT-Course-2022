@@ -8,7 +8,7 @@ type Props = {
   closeWindow: () => void;
 };
 
-export const ModalWindow = ({ closeWindow, card }: Props) => {
+const ModalWindow = ({ closeWindow, card }: Props) => {
   const handleCloseWindow = () => {
     closeWindow();
   };
@@ -61,3 +61,5 @@ export const ModalWindow = ({ closeWindow, card }: Props) => {
     </ModalWrapper>
   );
 };
+
+export default ModalWindow;

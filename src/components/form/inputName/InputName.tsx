@@ -1,35 +1,27 @@
-import React, { Component } from 'react';
+import React from 'react';
+
+import { validationName } from '../../../utils/validation';
 
 import { ErrorText } from '../Form.styled';
+import { IPropsComponent } from '../types';
 import { LabelName } from './InputName.styled';
 
-class InputName extends Component<IProps> {
-  render() {
-    const { label, inputRef, textError, name, handleChangeInput } = this.props;
-
-    return (
-      <>
-        <LabelName>
-          {label}
-          <input
-            type="text"
-            autoComplete="off"
-            ref={inputRef}
-            onChange={() => handleChangeInput(`${name}Error`, textError)}
-          />
-        </LabelName>
-        {textError !== '' && <ErrorText>{textError}</ErrorText>}
-      </>
-    );
-  }
-}
+const InputName = ({ label, name, textError, register }: IPropsComponent) => {
+  return (
+    <>
+      <LabelName>
+        {label}
+        <input
+          {...register(name, {
+            validate: (value) => validationName(value as string),
+          })}
+          type="text"
+          autoComplete="off"
+        />
+      </LabelName>
+      {textError && <ErrorText>{textError}</ErrorText>}
+    </>
+  );
+};
 
 export default InputName;
-
-export interface IProps {
-  label: string;
-  inputRef: React.RefObject<HTMLInputElement>;
-  textError: string;
-  name: string;
-  handleChangeInput: (nameError: string, textError: string) => void;
-}

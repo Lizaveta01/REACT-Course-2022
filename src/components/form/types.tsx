@@ -1,3 +1,5 @@
+import { UseFormRegister } from 'react-hook-form';
+
 export interface ICreatedCard {
   id: number;
   name: string;
@@ -26,4 +28,22 @@ export type IState = {
 export interface IValidation {
   isValid: boolean;
   validationErrors: IStateErrors;
+}
+export interface IFormData {
+  name: string;
+  birth: string;
+  planet: string;
+  species: boolean;
+  img: FileList;
+  news: boolean;
+}
+
+export type Name = 'name' | 'birth' | 'planet' | 'species' | 'img' | 'news';
+
+export interface IPropsComponent {
+  label: string;
+  name: Name;
+  textError: string | undefined;
+  register: UseFormRegister<IFormData>;
+  options?: string[];
 }

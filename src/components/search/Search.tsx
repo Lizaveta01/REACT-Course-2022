@@ -28,3 +28,5 @@ export const Search = ({ search, handleKeyDown, setSearch }: Props) => {
     </FormWrapper>
   );
 };
+
+export default Search;

@@ -14,7 +14,6 @@ describe('InputDate', () => {
     render(
       <InputDate
         label={label}
-        inputRef={inputRef}
         textError={textError}
         name={name}
         handleChangeInput={handleChangeInput}

@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
-
+import React from 'react';
+import { IFormData, Name } from '../types';
+import { UseFormRegister } from 'react-hook-form';
 import { LabelNews } from './CheckedNews.styled';
 
-class CheckedNews extends Component<IProps> {
-  render() {
-    const { label, inputRef } = this.props;
-
-    return (
-      <LabelNews>
-        {label}
-        <input type="checkbox" ref={inputRef} />
-      </LabelNews>
-    );
-  }
-}
+const CheckedNews = ({ label, name, register }: IProps) => {
+  return (
+    <LabelNews>
+      {label}
+      <input type="checkbox" {...register(name)} />
+    </LabelNews>
+  );
+};
 
 export default CheckedNews;
 
 export interface IProps {
   label: string;
-  inputRef: React.RefObject<HTMLInputElement>;
+  name: Name;
+  register: UseFormRegister<IFormData>;
 }

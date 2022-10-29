@@ -4,9 +4,11 @@ import CreatedCard from '../../components/createdCard/CreatedCard';
 import Form from '../../components/form/Form';
 import { ICreatedCard } from '../../components/form/types';
 import { ClassCSS } from '../../constants/constants';
+import { useComponentDidMount } from '../../utils/customHooks';
 import { CardList, FormPageWrapper, ModalWindow } from './FormPage.styled';
 
 export const FormPage = () => {
+  const isComponentMounted = useComponentDidMount();
   const [createdCards, setCreatedCards] = useState<ICreatedCard[]>([]);
   const [isOpenModalWindow, setIsOpenModalWindow] = useState(false);
 
@@ -21,8 +23,10 @@ export const FormPage = () => {
   };
 
   useEffect(() => {
-    setIsOpenModalWindow(true);
-    closeModalWindow();
+    if (isComponentMounted) {
+      setIsOpenModalWindow(true);
+      closeModalWindow();
+    }
   }, [createdCards]);
 
   return (

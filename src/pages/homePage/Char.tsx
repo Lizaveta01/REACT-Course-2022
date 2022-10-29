@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { ModalWindow } from '../../components/modalWindow/ModalWindow';
+import ModalWindow from '../../components/modalWindow/ModalWindow';
 import { ClassCSS, IChar, Word } from '../../constants/constants';
 import IconPlanetImage from '../../assets/Planet.svg';
 import IconGenderImage from '../../assets/Gender.svg';
@@ -22,7 +22,7 @@ type Props = {
   char: IChar;
 };
 
-export const Char = ({ char }: Props) => {
+const Char = ({ char }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = () => {
@@ -88,3 +88,5 @@ export const Char = ({ char }: Props) => {
     </>
   );
 };
+
+export default Char;
