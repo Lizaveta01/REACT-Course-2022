@@ -23,18 +23,3 @@ export interface IChar {
   };
   image: string;
 }
-
-type ApiState = {
-  searchValue: string;
-  cards: IChar[];
-  page: number;
-  currentPage: number;
-  status: string;
-  species: string;
-  gender: string;
-  sortNumber: string;
-  interval: {
-    start: number;
-    end: number;
-  };
-};
