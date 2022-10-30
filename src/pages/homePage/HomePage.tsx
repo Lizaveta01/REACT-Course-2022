@@ -6,6 +6,8 @@ import { HomePageWrapper } from './HomePage.styled';
 import { IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
 import { getAllCharacters } from '../../service/CharService';
+import Filter from '../../components/filter/Filter';
+import { useMyContext } from '../../context/Context';
 
 const HomePage = () => {
   const [search, setSearch] = useState(localStorage.getItem(Word.SEARCH) || '');
@@ -14,12 +16,15 @@ const HomePage = () => {
   const [error, setError] = useState(false);
   const [page, setPage] = useState(1);
 
+  const { status, species, gender } = useMyContext();
+
   const initSearch = () => {
     onRequest();
   };
+
   useEffect(() => {
     initSearch();
-  }, []);
+  }, [status, species, gender]);
 
   useEffect(() => {
     localStorage.setItem(Word.SEARCH, `${search}`);
@@ -40,7 +45,7 @@ const HomePage = () => {
   };
 
   const onRequest = () => {
-    getAllCharacters(page, search).then(onCharListLoaded).catch(onError);
+    getAllCharacters(page, search, status, gender, species).then(onCharListLoaded).catch(onError);
   };
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
@@ -56,6 +61,7 @@ const HomePage = () => {
         setSearch={(value: string) => changeSearch(value)}
         handleKeyDown={handleKeyDown}
       />
+      <Filter />
       {loading ? (
         <Spinner />
       ) : (
