@@ -1,12 +1,11 @@
 import React from 'react';
 
 import { validationName } from '../../../utils/validation';
-
 import { ErrorText } from '../Form.styled';
-import { IPropsComponent } from '../types';
+import { PropsComponent } from '../types';
 import { LabelName } from './InputName.styled';
 
-const InputName = ({ label, name, textError, register }: IPropsComponent) => {
+const InputName = ({ label, name, textError, register }: PropsComponent) => {
   return (
     <>
       <LabelName>

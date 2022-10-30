@@ -73,4 +73,5 @@ const Form = ({ addCard }: IProps) => {
     </FormWrapper>
   );
 };
+
 export default Form;

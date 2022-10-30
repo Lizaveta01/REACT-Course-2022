@@ -15,11 +15,11 @@ import {
 } from './CreatedCard.styled';
 import { ClassCSS } from '../../constants/constants';
 
-type props = {
+type Props = {
   card: ICreatedCard;
 };
 
-const CreatedCard = ({ card }: props) => {
+const CreatedCard = ({ card }: Props) => {
   const { name, planet, birth, news, species, img } = card;
 
   const aboutCharInfo = [

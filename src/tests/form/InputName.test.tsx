@@ -7,20 +7,11 @@ import InputName from '../../components/form/inputName/InputName';
 describe('InputName', () => {
   test('Check handleChange of InputName component with error', () => {
     const label = 'Name:';
-    const nameRef: React.RefObject<HTMLInputElement> = React.createRef();
     const textError = 'Field must consist of 3 - 15 English letters';
     const name = 'name';
-    const handleChangeInput = jest.fn();
+    const register = jest.fn();
 
-    render(
-      <InputName
-        label={label}
-        inputRef={nameRef}
-        textError={textError}
-        name={name}
-        handleChangeInput={handleChangeInput}
-      />,
-    );
+    render(<InputName label={label} textError={textError} name={name} register={register} />);
 
     const textInput = screen.getByLabelText(/Name:/i) as HTMLInputElement;
 
@@ -32,25 +23,16 @@ describe('InputName', () => {
 
     userEvent.type(textInput, 'Ricki');
     expect(textInput.value).toBe('Ricki');
-    expect(handleChangeInput).toHaveBeenCalledTimes(5);
+    expect(register).toHaveBeenCalledTimes(1);
   });
 
   test('Check handleChange of DateField component without error', () => {
     const label = 'Name:';
-    const nameRef: React.RefObject<HTMLInputElement> = React.createRef();
     const textError = '';
     const name = 'name';
-    const handleChangeInput = jest.fn();
+    const register = jest.fn();
 
-    render(
-      <InputName
-        label={label}
-        inputRef={nameRef}
-        textError={textError}
-        name={name}
-        handleChangeInput={handleChangeInput}
-      />,
-    );
+    render(<InputName label={label} textError={textError} name={name} register={register} />);
 
     const textInput = screen.getByLabelText(/Name:/i) as HTMLInputElement;
 
@@ -62,6 +44,6 @@ describe('InputName', () => {
 
     userEvent.type(textInput, 'Ricki');
     expect(textInput.value).toBe('Ricki');
-    expect(handleChangeInput).toHaveBeenCalledTimes(5);
+    expect(register).toHaveBeenCalledTimes(1);
   });
 });

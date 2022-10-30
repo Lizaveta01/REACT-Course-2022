@@ -8,19 +8,17 @@ describe('Select element', () => {
   test('Check handleChange of Select component with error', () => {
     const label = 'Planet:';
     const options = ['Earth', 'Mars', 'Mercury', 'Venus'];
-    const selectRef: React.RefObject<HTMLSelectElement> = React.createRef();
     const textError = 'Please choose a planet';
     const name = 'planet';
-    const handleChangeInput = jest.fn();
+    const register = jest.fn();
 
     render(
       <SelectPlanet
         label={label}
-        selectRef={selectRef}
         options={options}
         textError={textError}
         name={name}
-        handleChangeInput={handleChangeInput}
+        register={register}
       />,
     );
 
@@ -32,25 +30,23 @@ describe('Select element', () => {
 
     userEvent.selectOptions(select, 'Earth');
     expect(select.value).toBe('Earth');
-    expect(handleChangeInput).toHaveBeenCalledTimes(1);
+    expect(register).toHaveBeenCalledTimes(1);
   });
 
   test('Check handleChange of Select component without error', () => {
     const label = 'Planet:';
     const options = ['Earth', 'Mars', 'Mercury', 'Venus'];
-    const selectRef: React.RefObject<HTMLSelectElement> = React.createRef();
     const textError = '';
     const name = 'planet';
-    const handleChangeInput = jest.fn();
+    const register = jest.fn();
 
     render(
       <SelectPlanet
         label={label}
-        selectRef={selectRef}
         options={options}
         textError={textError}
         name={name}
-        handleChangeInput={handleChangeInput}
+        register={register}
       />,
     );
 
@@ -62,6 +58,6 @@ describe('Select element', () => {
 
     userEvent.selectOptions(select, 'Earth');
     expect(select.value).toBe('Earth');
-    expect(handleChangeInput).toHaveBeenCalledTimes(1);
+    expect(register).toHaveBeenCalledTimes(1);
   });
 });

@@ -1,11 +1,11 @@
 import React from 'react';
-import { validationPlanet } from '../../../utils/validation';
 
+import { validationPlanet } from '../../../utils/validation';
 import { ErrorText } from '../Form.styled';
-import { IPropsComponent } from '../types';
+import { PropsComponent } from '../types';
 import { LabelPlanet } from './SelectPlanet.styled';
 
-const SelectPlanet = ({ label, options, textError, name, register }: IPropsComponent) => {
+const SelectPlanet = ({ label, options, textError, name, register }: PropsComponent) => {
   return (
     <>
       <LabelPlanet>

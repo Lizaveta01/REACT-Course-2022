@@ -19,10 +19,11 @@ const HomePage = () => {
   };
   useEffect(() => {
     initSearch();
-    return () => {
-      localStorage.setItem(Word.SEARCH, `${search}`);
-    };
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem(Word.SEARCH, `${search}`);
+  });
 
   const changeSearch = (searchValue: string) => {
     setSearch(searchValue);

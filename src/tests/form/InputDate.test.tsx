@@ -6,19 +6,11 @@ import InputDate from '../../components/form/inputDate/InputDate';
 describe('InputDate', () => {
   test('Check handleChange of InputDate component with error', () => {
     const label = 'BirthDay:';
-    const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
     const textError = 'Your age should be from 18 to 100';
-    const name = 'birthday';
-    const handleChangeInput = jest.fn();
+    const name = 'birth';
+    const register = jest.fn();
 
-    render(
-      <InputDate
-        label={label}
-        textError={textError}
-        name={name}
-        handleChangeInput={handleChangeInput}
-      />,
-    );
+    render(<InputDate label={label} textError={textError} register={register} name={name} />);
 
     const inputDate = screen.getByLabelText(/BirthDay:/i) as HTMLInputElement;
     expect(inputDate).toBeInTheDocument();
@@ -30,25 +22,16 @@ describe('InputDate', () => {
 
     userEvent.type(inputDate, '2022-05-03');
     expect(inputDate.value).toBe('2022-05-03');
-    expect(handleChangeInput).toHaveBeenCalledTimes(1);
+    expect(register).toHaveBeenCalledTimes(1);
   });
 
   test('Check handleChange of InputDate component without error', () => {
     const label = 'BirthDay:';
-    const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
     const textError = '';
-    const name = 'birthday';
-    const handleChangeInput = jest.fn();
+    const name = 'birth';
+    const register = jest.fn();
 
-    render(
-      <InputDate
-        label={label}
-        inputRef={inputRef}
-        textError={textError}
-        name={name}
-        handleChangeInput={handleChangeInput}
-      />,
-    );
+    render(<InputDate label={label} textError={textError} register={register} name={name} />);
 
     const inputDate = screen.getByLabelText(/BirthDay:/i) as HTMLInputElement;
     expect(inputDate).toBeInTheDocument();
@@ -58,6 +41,5 @@ describe('InputDate', () => {
 
     userEvent.type(inputDate, '2022-05-03');
     expect(inputDate.value).toBe('2022-05-03');
-
   });
 });

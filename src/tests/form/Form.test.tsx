@@ -77,11 +77,5 @@ describe('Form', () => {
     userEvent.click(button);
     const windowMessage = screen.getByText(/Card was created successfully!/i);
     expect(windowMessage).toBeInTheDocument();
-
-    expect(inputName.value).toBe('');
-    expect(inputDate.value).toBe('');
-    expect(selectPlanet.value).toBe('');
-    expect(switcher.checked).toBe(false);
-    expect(inputCheckbox.checked).toBe(false);
   });
 });

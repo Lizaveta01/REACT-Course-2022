@@ -1,11 +1,11 @@
 import React from 'react';
-import { validationPicture } from '../../../utils/validation';
 
+import { validationPicture } from '../../../utils/validation';
 import { ErrorText } from '../Form.styled';
-import { IPropsComponent } from '../types';
+import { PropsComponent } from '../types';
 import { LabelUploadFile } from './InputFiles.styled';
 
-const InputFile = ({ label, textError, name, register }: IPropsComponent) => {
+const InputFile = ({ label, textError, name, register }: PropsComponent) => {
   return (
     <>
       <LabelUploadFile>

@@ -1,10 +1,16 @@
 import React from 'react';
-import { IFormData, Name } from '../types';
 import { UseFormRegister } from 'react-hook-form';
 
+import { IFormData, Name } from '../types';
 import { Input, Label, Switcher, SwitcherSlider, SwitcherTrack } from './ToggleSwitcher.styled';
 
-const ToggleSwitch = ({ label, name, register }: IProps) => {
+type Props = {
+  label: string;
+  name: Name;
+  register: UseFormRegister<IFormData>;
+};
+
+const ToggleSwitch = ({ label, name, register }: Props) => {
   return (
     <Label>
       {label}
@@ -19,9 +25,3 @@ const ToggleSwitch = ({ label, name, register }: IProps) => {
 };
 
 export default ToggleSwitch;
-
-export interface IProps {
-  label: string;
-  name: Name;
-  register: UseFormRegister<IFormData>;
-}

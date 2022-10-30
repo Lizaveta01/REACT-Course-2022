@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { IPropsComponent } from '../types';
+import { PropsComponent } from '../types';
 import { ErrorText } from '../Form.styled';
 import { LabelDate } from './InputDate.styled';
 import { validationBirthday } from '../../../utils/validation';
 
-const InputDate = ({ label, textError, name, register }: IPropsComponent) => {
+const InputDate = ({ label, textError, name, register }: PropsComponent) => {
   return (
     <>
       <LabelDate>

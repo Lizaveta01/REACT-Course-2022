@@ -1,9 +1,16 @@
 import React from 'react';
-import { IFormData, Name } from '../types';
 import { UseFormRegister } from 'react-hook-form';
+
+import { IFormData, Name } from '../types';
 import { LabelNews } from './CheckedNews.styled';
 
-const CheckedNews = ({ label, name, register }: IProps) => {
+type Props = {
+  label: string;
+  name: Name;
+  register: UseFormRegister<IFormData>;
+};
+
+const CheckedNews = ({ label, name, register }: Props) => {
   return (
     <LabelNews>
       {label}
@@ -13,9 +20,3 @@ const CheckedNews = ({ label, name, register }: IProps) => {
 };
 
 export default CheckedNews;
-
-export interface IProps {
-  label: string;
-  name: Name;
-  register: UseFormRegister<IFormData>;
-}
