@@ -1,22 +1,21 @@
 import React from 'react';
 
 import { IChar } from '../../constants/constants';
+import { useMyContext } from '../../context/Context';
 import Char from './Char';
 import { CharListWrapper } from './HomePage.styled';
 
-type Props = {
-  charList: IChar[] | [];
-};
+const CharList = () => {
+  const { firstContentIndex, lastContentIndex, cards } = useMyContext();
 
-const CharList = ({ charList }: Props) => {
   const renderItems = (arr: IChar[]) => {
-    const items = arr.map((item: IChar) => {
+    const items = arr.slice(firstContentIndex, lastContentIndex).map((item: IChar) => {
       return <Char char={item} key={item.id} />;
     });
     return <ul>{items}</ul>;
   };
 
-  const items = renderItems(charList);
+  const items = renderItems(cards);
   return <CharListWrapper>{items}</CharListWrapper>;
 };
 

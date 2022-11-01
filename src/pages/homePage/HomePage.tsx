@@ -5,18 +5,28 @@ import Search from '../../components/search/Search';
 import { HomePageWrapper } from './HomePage.styled';
 import { IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
-import { getAllCharacters } from '../../service/CharService';
-import Filter from '../../components/filter/Filter';
 import { useMyContext } from '../../context/Context';
+import Settings from '../../components/settings/Settings';
+import axios from 'axios';
 
 const HomePage = () => {
-  const [search, setSearch] = useState(localStorage.getItem(Word.SEARCH) || '');
-  const [charList, setCharList] = useState<IChar[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
 
-  const { status, species, gender } = useMyContext();
+  const {
+    status,
+    species,
+    gender,
+    search,
+    setSearch,
+    cards,
+    setCards,
+    page,
+    setPage,
+    setCurrentPage,
+    setCardsNumber,
+    countCardInPage,
+  } = useMyContext();
 
   const initSearch = () => {
     onRequest();
@@ -24,18 +34,14 @@ const HomePage = () => {
 
   useEffect(() => {
     initSearch();
-  }, [status, species, gender]);
-
-  useEffect(() => {
-    localStorage.setItem(Word.SEARCH, `${search}`);
-  });
+  }, [page, status, species, gender, countCardInPage]);
 
   const changeSearch = (searchValue: string) => {
     setSearch(searchValue);
   };
 
   const onCharListLoaded = (newCharList: IChar[]) => {
-    setCharList(newCharList);
+    setCards(newCharList);
     setLoading(false);
   };
 
@@ -45,8 +51,24 @@ const HomePage = () => {
   };
 
   const onRequest = () => {
-    getAllCharacters(page, search, status, gender, species).then(onCharListLoaded).catch(onError);
+    getAllCharacters().then(onCharListLoaded).catch(onError);
   };
+
+  async function getAllCharacters() {
+    const apiBase = 'https://rickandmortyapi.com/api';
+    const res = await getResourse(
+      `${apiBase}/character/?page=${page}&name=${search}&status=${status}&gender=${gender}&species=${species}`,
+    );
+    // setPage(1);
+    // setCurrentPage(1);
+    return res;
+  }
+
+  async function getResourse(url: string) {
+    const res = await axios.get(url);
+    setCardsNumber(res.data.info.count);
+    return await res.data.results;
+  }
 
   const handleKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === Word.ENTER) {
@@ -61,17 +83,11 @@ const HomePage = () => {
         setSearch={(value: string) => changeSearch(value)}
         handleKeyDown={handleKeyDown}
       />
-      <Filter />
+      <Settings />
       {loading ? (
         <Spinner />
       ) : (
-        <>
-          {!!charList.length ? (
-            <CharList charList={charList} />
-          ) : (
-            <p>Sorry, this character is not found</p>
-          )}
-        </>
+        <>{!!cards.length ? <CharList /> : <p>Sorry, this character is not found</p>}</>
       )}
     </HomePageWrapper>
   );
