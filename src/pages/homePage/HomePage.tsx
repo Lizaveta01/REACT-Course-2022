@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 import CharList from './CharList';
 import Search from '../../components/search/Search';
-import { HomePageWrapper } from './HomePage.styled';
+import { HomePageWrapper, InfoMessage } from './HomePage.styled';
 import { IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
 import { useMyContext } from '../../context/Context';
@@ -22,8 +22,6 @@ const HomePage = () => {
     cards,
     setCards,
     page,
-    setPage,
-    setCurrentPage,
     setCardsNumber,
     countCardInPage,
   } = useMyContext();
@@ -48,6 +46,7 @@ const HomePage = () => {
   const onError = () => {
     setError(true);
     setLoading(false);
+    setCards([]);
   };
 
   const onRequest = () => {
@@ -59,8 +58,6 @@ const HomePage = () => {
     const res = await getResourse(
       `${apiBase}/character/?page=${page}&name=${search}&status=${status}&gender=${gender}&species=${species}`,
     );
-    // setPage(1);
-    // setCurrentPage(1);
     return res;
   }
 
@@ -87,7 +84,13 @@ const HomePage = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <>{!!cards.length ? <CharList /> : <p>Sorry, this character is not found</p>}</>
+        <>
+          {!!cards.length ? (
+            <CharList charList={cards} />
+          ) : (
+            <InfoMessage>Sorry, this character is not found</InfoMessage>
+          )}
+        </>
       )}
     </HomePageWrapper>
   );

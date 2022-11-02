@@ -1,5 +1,5 @@
 import React from 'react';
-import { setSourceMapRange } from 'typescript';
+
 import { useMyContext } from '../../context/Context';
 import { SelectContainer, Container, Label } from './Filter.styled';
 

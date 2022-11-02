@@ -5,8 +5,12 @@ import { useMyContext } from '../../context/Context';
 import Char from './Char';
 import { CharListWrapper } from './HomePage.styled';
 
-const CharList = () => {
-  const { firstContentIndex, lastContentIndex, cards } = useMyContext();
+type Props = {
+  charList: IChar[] | [];
+};
+
+const CharList = ({ charList }: Props) => {
+  const { firstContentIndex, lastContentIndex } = useMyContext();
 
   const renderItems = (arr: IChar[]) => {
     const items = arr.slice(firstContentIndex, lastContentIndex).map((item: IChar) => {
@@ -15,7 +19,7 @@ const CharList = () => {
     return <ul>{items}</ul>;
   };
 
-  const items = renderItems(cards);
+  const items = renderItems(charList);
   return <CharListWrapper>{items}</CharListWrapper>;
 };
 

@@ -8,7 +8,7 @@ export const SelectContainer = styled.div`
   select {
     display: flex;
     flex-direction: column;
-    width: 120px;
+    width: 140px;
     height: 30px;
     font-size: 16px;
     color: ${Colors.WHITE};

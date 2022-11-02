@@ -9,6 +9,10 @@ export const HomePageWrapper = styled.div`
   justify-content: center;
   flex-direction: column;
 `;
+export const InfoMessage = styled.div`
+  font-size: 24px;
+  margin-top: 100px;
+`;
 export const CharListWrapper = styled.div`
   display: flex;
   align-items: center;
