@@ -56,11 +56,7 @@ class Form extends Component<IProps, IState> {
       isEmpty = false;
     }
 
-    if (isHasErrors || isEmpty) {
-      (this.btnRef.current as HTMLButtonElement).disabled = true;
-    } else {
-      (this.btnRef.current as HTMLButtonElement).disabled = false;
-    }
+    (this.btnRef.current as HTMLButtonElement).disabled = isHasErrors || isEmpty;
   };
 
   getInputValue = (inputRef: InputRefTypes): string => {
