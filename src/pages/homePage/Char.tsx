@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import ModalWindow from '../../components/modalWindow/ModalWindow';
 import { ClassCSS, IChar, Word } from '../../constants/constants';
 import IconPlanetImage from '../../assets/Planet.svg';
 import IconGenderImage from '../../assets/Gender.svg';
@@ -17,19 +17,12 @@ import {
   ItemContainer,
   AboutCharAddit,
 } from './HomePage.styled';
-import { Link } from 'react-router-dom';
 
 type Props = {
   char: IChar;
 };
 
 const Char = ({ char }: Props) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleClick = () => {
-    // setIsModalOpen(!isModalOpen);
-  };
-
   const { image, name, origin, gender, species, id } = char;
 
   const aboutCharInfo = [
@@ -84,8 +77,6 @@ const Char = ({ char }: Props) => {
           </AboutCharAddit>
         </ItemInfoDiv>
       </CharItem>
-
-      {isModalOpen && <ModalWindow card={char} closeWindow={handleClick} />}
     </>
   );
 };

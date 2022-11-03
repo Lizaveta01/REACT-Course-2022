@@ -1,15 +1,52 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Pagination, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
 import { useMyContext } from '../../context/Context';
 import { Container } from './Pagination.style';
+import { Colors } from '../../styles/constansts';
+import { Cards, Interval } from '../../constants/constants';
+
+const IntervalForFour = {
+  period_1: {
+    start: 0,
+    end: 4,
+  },
+  period_2: {
+    start: 4,
+    end: 8,
+  },
+
+  period_3: {
+    start: 8,
+    end: 12,
+  },
+  period_4: {
+    start: 12,
+    end: 16,
+  },
+  period_5: {
+    start: 16,
+    end: 20,
+  },
+};
+
+const IntervalForTen = {
+  period_1: {
+    start: 0,
+    end: 10,
+  },
+  period_2: {
+    start: 10,
+    end: 20,
+  },
+};
 
 const useStyles = makeStyles(() => ({
   ul: {
     '& .MuiPaginationItem-root': {
-      color: '#fff',
+      color: Colors.WHITE,
     },
   },
 }));
@@ -30,68 +67,92 @@ const PaginationComponent = () => {
   } = useMyContext();
 
   const pageCount = Math.ceil(cardsNumber / countCardInPage);
-  // const [selectPage, setSelectPage] = useState(1);
+  const [pageNumber, setPageNumber] = useState(Cards.DEFAULT_PAGE_1);
+
+  useEffect(() => {
+    checkDirection();
+  }, [pageNumber]);
 
   const classes = useStyles();
   const handleChange = (num: number) => {
-    checkDirection(num);
+    setPageNumber(num);
   };
 
-  function checkDirection(num: number) {
-    if (num === currentPage + 1) {
-      nextPage(num);
-    } else if (num === currentPage - 1) {
-      prevPage(num);
+  function checkDirection() {
+    if (pageNumber === currentPage + 1) {
+      nextPage();
+    } else if (pageNumber === currentPage - 1) {
+      prevPage();
     } else {
-      checkPage(num);
+      checkPage();
     }
   }
-  function nextPage(num: number) {
+  function nextPage() {
     const isUbdateResponse = checkCountCardsNextPage();
     if (isUbdateResponse) {
       setPage(page + 1);
     }
     setIntervalNext();
-    setCurrentPage(num);
+    setCurrentPage(pageNumber);
   }
 
-  function prevPage(num: number) {
+  function prevPage() {
     const isUbdateResponse = checkCountCardsPrevPage();
     if (isUbdateResponse) {
       setPage(page - 1);
     }
     setIntervalPrev();
-    setCurrentPage(num);
+    setCurrentPage(pageNumber);
   }
 
-  function checkPage(num: number) {
-    setCurrentPage(num);
-    if (countCardInPage === 20) {
-      setPage(num);
+  function checkPage() {
+    setCurrentPage(pageNumber);
+    if (countCardInPage === Cards.DEFAUL_COUNT_REQUEST) {
+      setPage(pageNumber);
     }
-    if (countCardInPage === 10) {
-      num % 2 === 0
-        ? (setPage(num / 2), setFirstIndex(10), setLastIndex(20))
-        : (setPage(Math.ceil(num / 2)), setFirstIndex(0), setLastIndex(10));
+    if (countCardInPage === Cards.COUNT_10) {
+      SetInervalToTen();
     }
-    if (countCardInPage === 4) {
-      num % 5 === 0
-        ? (setPage(num / 5), setFirstIndex(16), setLastIndex(20))
-        : num % 5 === 1
-        ? (setPage(Math.ceil(num / 5)), setFirstIndex(0), setLastIndex(4))
-        : num % 5 === 2
-        ? (setPage(Math.ceil(num / 5)), setFirstIndex(4), setLastIndex(8))
-        : num % 5 === 3
-        ? (setPage(Math.ceil(num / 5)), setFirstIndex(8), setLastIndex(12))
-        : (setPage(Math.ceil(num / 5)), setFirstIndex(12), setLastIndex(16));
+    if (countCardInPage === Cards.COUNT_4) {
+      SetInervalToFour();
+    }
+  }
+
+  function SetInervalToTen() {
+    const { period_1, period_2 } = IntervalForTen;
+    setPage(Math.ceil(pageNumber / Cards.DIVIDE_NUM_2));
+    pageNumber % Cards.DIVIDE_NUM_2 === 0
+      ? (setFirstIndex(period_2.start), setLastIndex(period_2.end))
+      : (setFirstIndex(period_1.start), setLastIndex(period_1.end));
+  }
+
+  function SetInervalToFour() {
+    const { period_1, period_2, period_3, period_4, period_5 } = IntervalForFour;
+    setPage(Math.ceil(pageNumber / Cards.DIVIDE_NUM_5));
+    switch (pageNumber % Cards.DIVIDE_NUM_5) {
+      case 1:
+        setFirstIndex(period_1.start), setLastIndex(period_1.end);
+        break;
+      case 2:
+        setFirstIndex(period_2.start), setLastIndex(period_2.end);
+        break;
+      case 3:
+        setFirstIndex(period_3.start), setLastIndex(period_3.end);
+        break;
+      case 4:
+        setFirstIndex(period_4.start), setLastIndex(period_4.end);
+        break;
+      default:
+        setFirstIndex(period_5.start), setLastIndex(period_5.end);
+        break;
     }
   }
 
   function checkCountCardsNextPage() {
     if (
-      countCardInPage === 20 ||
-      (countCardInPage === 4 && currentPage % 5 === 0) ||
-      (countCardInPage === 10 && currentPage % 2 === 0)
+      countCardInPage === Cards.COUNT_20 ||
+      (countCardInPage === Cards.COUNT_4 && currentPage % Cards.DIVIDE_NUM_5 === 0) ||
+      (countCardInPage === Cards.COUNT_10 && currentPage % Cards.DIVIDE_NUM_2 === 0)
     ) {
       return true;
     } else {
@@ -101,9 +162,9 @@ const PaginationComponent = () => {
 
   function checkCountCardsPrevPage() {
     if (
-      countCardInPage === 20 ||
-      (countCardInPage === 4 && currentPage % 5 === 1) ||
-      (countCardInPage === 10 && currentPage % 2 === 1)
+      countCardInPage === Cards.COUNT_20 ||
+      (countCardInPage === Cards.COUNT_4 && currentPage % Cards.DIVIDE_NUM_5 === 1) ||
+      (countCardInPage === Cards.COUNT_10 && currentPage % Cards.DIVIDE_NUM_2 === 1)
     ) {
       return true;
     } else {
@@ -112,8 +173,8 @@ const PaginationComponent = () => {
   }
 
   function setIntervalNext() {
-    if (lastContentIndex === 20) {
-      setFirstIndex(0);
+    if (lastContentIndex === Cards.DEFAUL_COUNT_REQUEST) {
+      setFirstIndex(Interval.DEFAULT);
       setLastIndex(countCardInPage);
     } else {
       setFirstIndex(firstContentIndex + countCardInPage);
@@ -123,8 +184,8 @@ const PaginationComponent = () => {
 
   function setIntervalPrev() {
     if (lastContentIndex === countCardInPage) {
-      setFirstIndex(20 - countCardInPage);
-      setLastIndex(20);
+      setFirstIndex(Cards.DEFAUL_COUNT_REQUEST - countCardInPage);
+      setLastIndex(Cards.DEFAUL_COUNT_REQUEST);
     } else {
       setFirstIndex(firstContentIndex - countCardInPage);
       setLastIndex(lastContentIndex - countCardInPage);

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Cards, Interval, Word } from '../../constants/constants';
 
 import { useMyContext } from '../../context/Context';
 import { SelectContainer, Container, Label } from './Filter.styled';
@@ -48,37 +49,31 @@ const Filter = () => {
 
   const setOption = (option: string, funcType: string) => {
     switch (funcType) {
-      case 'Species':
+      case Word.SPECIES:
         return setSpecies(option);
-      case 'Status':
+      case Word.STATUS:
         return setStatus(option);
-      case 'Gender':
+      case Word.GENDER:
         return setGender(option);
-      case 'Count cards':
+      case Word.COUNT_CARDS:
         return setInterval(+option);
     }
   };
 
   function setInterval(option: number) {
     switch (option) {
-      case 4:
-        setLastIndex(4);
-        setFirstIndex(0);
-        setCurrentPage(1);
-        setPage(1);
+      case Cards.COUNT_4:
+        setLastIndex(Cards.COUNT_4);
         break;
-      case 10:
-        setLastIndex(10);
-        setFirstIndex(0);
-        setCurrentPage(1);
-        setPage(1);
+      case Cards.COUNT_10:
+        setLastIndex(Cards.COUNT_10);
         break;
       default:
-        setLastIndex(20);
-        setFirstIndex(0);
-        setCurrentPage(1);
-        setPage(1);
+        setLastIndex(Cards.COUNT_20);
     }
+    setCurrentPage(Cards.DEFAULT_PAGE_1);
+    setPage(Cards.DEFAULT_PAGE_1);
+    setFirstIndex(Interval.DEFAULT);
     setCountCards(+option);
   }
 
