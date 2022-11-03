@@ -36,7 +36,6 @@ const CardPage = () => {
     const apiBase = 'https://rickandmortyapi.com/api';
     try {
       const res = await getResourse(`${apiBase}/character/${cardID}`);
-      console.log(res);
       setCharacter(res);
     } catch {
       handleClick();
