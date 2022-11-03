@@ -17,6 +17,7 @@ import {
   ItemContainer,
   AboutCharAddit,
 } from './HomePage.styled';
+import { Link } from 'react-router-dom';
 
 type Props = {
   char: IChar;
@@ -26,10 +27,10 @@ const Char = ({ char }: Props) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClick = () => {
-    setIsModalOpen(!isModalOpen);
+    // setIsModalOpen(!isModalOpen);
   };
 
-  const { image, name, origin, gender, species } = char;
+  const { image, name, origin, gender, species, id } = char;
 
   const aboutCharInfo = [
     {
@@ -51,7 +52,7 @@ const Char = ({ char }: Props) => {
 
   return (
     <>
-      <CharItem data-testid="char-item" onClick={handleClick}>
+      <CharItem data-testid="char-item" as={Link} to={`character/${id}`}>
         <ButtonAddFavorite />
         <ItemImageDiv>
           <img src={image} alt="char-image" />

@@ -7,6 +7,7 @@ import FormPage from '../pages/formPage/FormPage';
 import NotFoundPage from '../pages/notFoundPage/NotFoundPage';
 import { GlobalStyle } from '../styles/global';
 import Header from '../components/header/Header';
+import CardPage from '../pages/cardPage/CardPage';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutUs />} />
         <Route path="/form" element={<FormPage />} />
+        <Route path="/character/:cardID" element={<CardPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
