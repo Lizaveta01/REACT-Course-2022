@@ -9,6 +9,7 @@ import {
   setGender,
   setIntervalEnd,
   setIntervalStart,
+  setInterval,
   setPage,
   setSpecies,
   setStatus,
@@ -59,25 +60,30 @@ const Filter = () => {
       case Word.GENDER:
         return dispatch(setGender(option));
       case Word.COUNT_CARDS:
-        return setInterval(+option);
+        return setIntervalValue(+option);
     }
   };
 
-  function setInterval(option: number) {
+  function setIntervalValue(option: number) {
+    const period = {
+      start: Interval.DEFAULT,
+      end: Cards.COUNT_20,
+    };
     switch (option) {
       case Cards.COUNT_4:
-        dispatch(setIntervalEnd(Cards.COUNT_4));
+        period.end = Cards.COUNT_4;
         break;
       case Cards.COUNT_10:
-        dispatch(setIntervalEnd(Cards.COUNT_10));
+        period.end = Cards.COUNT_10;
         break;
       default:
-        dispatch(setIntervalEnd(Cards.COUNT_20));
+        period.end = Cards.COUNT_20;
+        break;
     }
+    dispatch(setCardsCountInPage(+option));
     dispatch(setCurrentPage(Cards.DEFAULT_PAGE_1));
     dispatch(setPage(Cards.DEFAULT_PAGE_1));
-    dispatch(setIntervalStart(Interval.DEFAULT));
-    dispatch(setCardsCountInPage(+option));
+    dispatch(setInterval(period));
   }
 
   return (

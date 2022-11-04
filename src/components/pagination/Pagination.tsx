@@ -6,8 +6,9 @@ import { makeStyles } from '@mui/styles';
 
 import { Container } from './Pagination.style';
 import { Colors } from '../../styles/constansts';
+
 import { Cards, Interval } from '../../constants/constants';
-import { setCurrentPage, setIntervalEnd, setIntervalStart, setPage } from '../../actions/actions';
+import { setCurrentPage, setPage, setInterval } from '../../actions/actions';
 import { IReducerState } from '../../reducer/Reducer';
 
 const IntervalForFour = {
@@ -60,8 +61,8 @@ const PaginationComponent = () => {
   const currentPage = useSelector((state: IReducerState) => state.currentPage);
   const cardsNumber = useSelector((state: IReducerState) => state.cardsNumber);
   const cards = useSelector((state: IReducerState) => state.cards);
-  const intervalStart = useSelector((state: IReducerState) => state.intervalStart);
-  const intervalEnd = useSelector((state: IReducerState) => state.intervalEnd);
+  const intervalStart = useSelector((state: IReducerState) => state.interval.start);
+  const intervalEnd = useSelector((state: IReducerState) => state.interval.end);
 
   const pageCount = Math.ceil(cardsNumber / countCardInPage);
   const [pageNumber, setPageNumber] = useState(Cards.DEFAULT_PAGE_1);
@@ -120,8 +121,8 @@ const PaginationComponent = () => {
     const { period_1, period_2 } = IntervalForTen;
     dispatch(setPage(Math.ceil(pageNumber / Cards.DIVIDE_NUM_2)));
     pageNumber % Cards.DIVIDE_NUM_2 === 0
-      ? (dispatch(setIntervalStart(period_2.start)), dispatch(setIntervalEnd(period_2.end)))
-      : (dispatch(setIntervalStart(period_1.start)), dispatch(setIntervalEnd(period_1.end)));
+      ? dispatch(setInterval(period_2))
+      : dispatch(setInterval(period_1));
   }
 
   function SetInervalToFour() {
@@ -129,19 +130,19 @@ const PaginationComponent = () => {
     dispatch(setPage(Math.ceil(pageNumber / Cards.DIVIDE_NUM_5)));
     switch (pageNumber % Cards.DIVIDE_NUM_5) {
       case 1:
-        dispatch(setIntervalStart(period_1.start)), dispatch(setIntervalEnd(period_1.end));
+        dispatch(setInterval(period_1));
         break;
       case 2:
-        dispatch(setIntervalStart(period_2.start)), dispatch(setIntervalEnd(period_2.end));
+        dispatch(setInterval(period_2));
         break;
       case 3:
-        dispatch(setIntervalStart(period_3.start)), dispatch(setIntervalEnd(period_3.end));
+        dispatch(setInterval(period_3));
         break;
       case 4:
-        dispatch(setIntervalStart(period_4.start)), dispatch(setIntervalEnd(period_4.end));
+        dispatch(setInterval(period_4));
         break;
       default:
-        dispatch(setIntervalStart(period_5.start)), dispatch(setIntervalEnd(period_5.end));
+        dispatch(setInterval(period_5));
         break;
     }
   }
@@ -171,22 +172,30 @@ const PaginationComponent = () => {
   }
 
   function setIntervalNext() {
+    const period = {
+      start: Interval.DEFAULT,
+      end: countCardInPage,
+    };
     if (intervalEnd === Cards.DEFAUL_COUNT_REQUEST) {
-      dispatch(setIntervalStart(Interval.DEFAULT));
-      dispatch(setIntervalEnd(countCardInPage));
+      dispatch(setInterval(period));
     } else {
-      dispatch(setIntervalStart(intervalStart + countCardInPage));
-      dispatch(setIntervalEnd(intervalEnd + countCardInPage));
+      period.start = intervalStart + countCardInPage;
+      period.end = intervalEnd + countCardInPage;
+      dispatch(setInterval(period));
     }
   }
 
   function setIntervalPrev() {
+    const period = {
+      start: Cards.DEFAUL_COUNT_REQUEST - countCardInPage,
+      end: Cards.DEFAUL_COUNT_REQUEST,
+    };
     if (intervalEnd === countCardInPage) {
-      dispatch(setIntervalStart(Cards.DEFAUL_COUNT_REQUEST - countCardInPage));
-      dispatch(setIntervalEnd(Cards.DEFAUL_COUNT_REQUEST));
+      dispatch(setInterval(period));
     } else {
-      dispatch(setIntervalStart(intervalStart - countCardInPage));
-      dispatch(setIntervalEnd(intervalEnd - countCardInPage));
+      period.start = intervalStart - countCardInPage;
+      period.end = intervalEnd - countCardInPage;
+      dispatch(setInterval(period));
     }
   }
 

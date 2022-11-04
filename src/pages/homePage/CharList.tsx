@@ -11,8 +11,8 @@ type Props = {
 };
 
 const CharList = ({ charList }: Props) => {
-  const intervalStart = useSelector((state: IReducerState) => state.intervalStart);
-  const intervalEnd = useSelector((state: IReducerState) => state.intervalEnd);
+  const intervalStart = useSelector((state: IReducerState) => state.interval.start);
+  const intervalEnd = useSelector((state: IReducerState) => state.interval.end);
 
   const renderItems = (arr: IChar[]) => {
     const items = arr.slice(intervalStart, intervalEnd).map((item: IChar) => {

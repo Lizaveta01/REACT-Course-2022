@@ -31,6 +31,19 @@ export const setSpecies = createAction<string>('SET_SPECIES');
 export const setPage = createAction<number>('SET_PAGE');
 export const setCurrentPage = createAction<number>('SET_CURRENT_PAGE');
 export const setCardsCountInPage = createAction<number>(SET_COUNT_CARD_IN_PAGE);
-export const setIntervalStart = createAction<number>('SET_INTERVAL_START');
-export const setIntervalEnd = createAction<number>('SET_INTERVAL_END');
+
 export const setCardsNumber = createAction<number>(SET_CARDS_NUMBER);
+
+export const setInterval = createAction<number>('SET_INTERVAL', (interval: interval) => {
+  return {
+    payload: {
+      start: interval.start,
+      end: interval.end,
+    },
+  };
+});
+
+type interval = {
+  start: number;
+  end: number;
+};

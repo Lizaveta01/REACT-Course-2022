@@ -9,8 +9,7 @@ import {
   setSpecies,
   setStatus,
   setPage,
-  setIntervalStart,
-  setIntervalEnd,
+  setInterval,
   setCardsNumber,
 } from '../actions/actions';
 import { IChar } from '../constants/constants';
@@ -25,8 +24,10 @@ export interface IReducerState {
   page: number;
   currentPage: number;
   countCardInPage: number;
-  intervalStart: number;
-  intervalEnd: number;
+  interval: {
+    start: number;
+    end: number;
+  };
   loadingStatus: string;
 }
 
@@ -40,8 +41,10 @@ const initialState: IReducerState = {
   page: 1,
   currentPage: 1,
   countCardInPage: 20,
-  intervalStart: 0,
-  intervalEnd: 20,
+  interval: {
+    start: 0,
+    end: 20,
+  },
   loadingStatus: 'idle',
 };
 
@@ -79,14 +82,12 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setCardsCountInPage, (state, action) => {
       state.countCardInPage = action.payload;
     })
-    .addCase(setIntervalStart, (state, action) => {
-      state.intervalStart = action.payload;
-    })
-    .addCase(setIntervalEnd, (state, action) => {
-      state.intervalEnd = action.payload;
-    })
     .addCase(setCardsNumber, (state, action) => {
       state.cardsNumber = action.payload;
+    })
+    .addCase(setInterval, (state, action) => {
+      state.interval.start = action.payload.start;
+      state.interval.end = action.payload.end;
     })
     .addDefaultCase(() => {});
 });
