@@ -1,8 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
-
-type Data<T, N> = {
-  [key: string]: T | N;
-};
+import { useEffect, useRef } from 'react';
 
 export const useComponentDidMount = () => {
   const ref: React.MutableRefObject<boolean | undefined> = useRef();

@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Pagination, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import { useMyContext } from '../../context/Context';
 import { Container } from './Pagination.style';
 import { Colors } from '../../styles/constansts';
 import { Cards, Interval } from '../../constants/constants';
@@ -69,6 +68,7 @@ const PaginationComponent = () => {
 
   useEffect(() => {
     checkDirection();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageNumber]);
 
   const classes = useStyles();

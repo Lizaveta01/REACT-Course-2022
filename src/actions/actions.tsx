@@ -17,7 +17,6 @@ export const SET_INTERVAL = 'SET_INTERVAL';
 
 export const fetchCards = createAsyncThunk(CARDS_FETCHING, async (url: string) => {
   const { request } = useHttp();
-  const res = await request(url);
   return request(url);
 });
 
