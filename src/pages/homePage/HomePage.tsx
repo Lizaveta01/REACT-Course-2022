@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 
 import CharList from './CharList';
 import Search from '../../components/search/Search';
@@ -7,11 +7,10 @@ import { IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
 import { useMyContext } from '../../context/Context';
 import Settings from '../../components/settings/Settings';
-import axios from 'axios';
+import { useHttp } from '../../utils/customHooks';
 
 const HomePage = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const { loading, request } = useHttp();
 
   const {
     status,
@@ -40,31 +39,19 @@ const HomePage = () => {
 
   const onCharListLoaded = (newCharList: IChar[]) => {
     setCards(newCharList);
-    setLoading(false);
-  };
-
-  const onError = () => {
-    setError(true);
-    setLoading(false);
-    setCards([]);
   };
 
   const onRequest = () => {
-    getAllCharacters().then(onCharListLoaded).catch(onError);
+    getAllCharacters().then(onCharListLoaded);
   };
 
   async function getAllCharacters() {
     const apiBase = 'https://rickandmortyapi.com/api';
-    const res = await getResourse(
+    const res = await request(
       `${apiBase}/character/?page=${page}&name=${search}&status=${status}&gender=${gender}&species=${species}`,
     );
-    return res;
-  }
-
-  async function getResourse(url: string) {
-    const res = await axios.get(url);
-    setCardsNumber(res.data.info.count);
-    return await res.data.results;
+    setCardsNumber(res.info.count);
+    return res.results;
   }
 
   const handleKeyDown = (event: React.KeyboardEvent) => {

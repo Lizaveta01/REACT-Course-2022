@@ -1,6 +1,6 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useHttp } from '../../utils/customHooks';
 
 import {
   AboutCard,
@@ -27,6 +27,7 @@ const CardPage = () => {
   const { cardID } = useParams();
   const navigate = useNavigate();
   const [character, setCharacter] = useState<ICharacter>();
+  const { request } = useHttp();
 
   useEffect(() => {
     getCharacter();
@@ -34,17 +35,8 @@ const CardPage = () => {
 
   async function getCharacter() {
     const apiBase = 'https://rickandmortyapi.com/api';
-    try {
-      const res = await getResourse(`${apiBase}/character/${cardID}`);
-      setCharacter(res);
-    } catch {
-      handleClick();
-    }
-  }
-
-  async function getResourse(url: string) {
-    const res = await axios.get(url);
-    return res.data;
+    const res = await request(`${apiBase}/character/${cardID}`);
+    setCharacter(res);
   }
 
   function handleClick() {
