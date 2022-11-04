@@ -1,4 +1,5 @@
 import React from 'react';
+import { nanoid } from 'nanoid';
 
 import IconSpeciesImage from '../../assets/Alien.svg';
 import IconPlanetImage from '../../assets/Planet.svg';
@@ -24,17 +25,14 @@ const CreatedCard = ({ card }: Props) => {
 
   const aboutCharInfo = [
     {
-      id: 11221,
       info: species,
       icon: IconSpeciesImage,
     },
     {
-      id: 11222,
       info: planet,
       icon: IconPlanetImage,
     },
     {
-      id: 11223,
       info: birth,
       icon: IconBirthdayImage,
     },
@@ -47,7 +45,7 @@ const CreatedCard = ({ card }: Props) => {
         <Name>{name}</Name>
         {aboutCharInfo.map((item) => {
           return (
-            <BlockContainer key={item.id}>
+            <BlockContainer key={nanoid()}>
               <IconDiv style={{ backgroundImage: `url(${item.icon})` }} />
               <p>{item.info}</p>
             </BlockContainer>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 import { useHttp } from '../../utils/customHooks';
 
 import {
@@ -45,27 +46,22 @@ const CardPage = () => {
 
   const aboutCharInfo = [
     {
-      id: 1231,
       title: 'Name',
       text: character?.name,
     },
     {
-      id: 1232,
       title: 'Status',
       text: character?.status,
     },
     {
-      id: 1233,
       title: 'Gender',
       text: character?.gender,
     },
     {
-      id: 1234,
       title: 'Species',
       text: character?.species,
     },
     {
-      id: 1235,
       title: 'Planet',
       text: character?.location.name,
     },
@@ -84,7 +80,7 @@ const CardPage = () => {
         <MainInfo>
           {aboutCharInfo.map((item) => {
             return (
-              <p key={item.id}>
+              <p key={nanoid()}>
                 {item.title}: {item.text}
               </p>
             );

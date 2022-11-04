@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { nanoid } from 'nanoid';
 
 import { ClassCSS, IChar, Word } from '../../constants/constants';
 import IconPlanetImage from '../../assets/Planet.svg';
@@ -27,17 +28,14 @@ const Char = ({ char }: Props) => {
 
   const aboutCharInfo = [
     {
-      id: 11231,
       info: gender,
       icon: IconGenderImage,
     },
     {
-      id: 11232,
       info: species,
       icon: IconSpeciesImage,
     },
     {
-      id: 11233,
       info: origin.name.split(' ')[0],
       icon: IconPlanetImage,
     },
@@ -68,7 +66,7 @@ const Char = ({ char }: Props) => {
           <AboutCharAddit>
             {aboutCharInfo.map((item) => {
               return (
-                <ItemContainer key={item.id}>
+                <ItemContainer key={nanoid()}>
                   <IconDiv style={{ backgroundImage: `url(${item.icon})` }} />
                   <p>{item.info}</p>
                 </ItemContainer>

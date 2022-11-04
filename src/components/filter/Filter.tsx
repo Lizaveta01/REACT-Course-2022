@@ -1,24 +1,27 @@
 import React from 'react';
 import { Cards, Interval, Word } from '../../constants/constants';
+import { useDispatch, useSelector } from 'react-redux';
 
-import { useMyContext } from '../../context/Context';
 import { SelectContainer, Container, Label } from './Filter.styled';
+import {
+  setCardsCountInPage,
+  setCurrentPage,
+  setGender,
+  setIntervalEnd,
+  setIntervalStart,
+  setPage,
+  setSpecies,
+  setStatus,
+} from '../../actions/actions';
+import { IReducerState } from '../../reducer/Reducer';
 
 const Filter = () => {
-  const {
-    status,
-    species,
-    gender,
-    setStatus,
-    setSpecies,
-    setGender,
-    countCardInPage,
-    setCountCards,
-    setLastIndex,
-    setFirstIndex,
-    setCurrentPage,
-    setPage,
-  } = useMyContext();
+  const dispatch = useDispatch();
+  const gender = useSelector((state: IReducerState) => state.gender);
+  const status = useSelector((state: IReducerState) => state.status);
+  const species = useSelector((state: IReducerState) => state.species);
+
+  const countCardInPage = useSelector((state: IReducerState) => state.countCardInPage);
 
   const params = [
     {
@@ -50,11 +53,11 @@ const Filter = () => {
   const setOption = (option: string, funcType: string) => {
     switch (funcType) {
       case Word.SPECIES:
-        return setSpecies(option);
+        return dispatch(setSpecies(option));
       case Word.STATUS:
-        return setStatus(option);
+        return dispatch(setStatus(option));
       case Word.GENDER:
-        return setGender(option);
+        return dispatch(setGender(option));
       case Word.COUNT_CARDS:
         return setInterval(+option);
     }
@@ -63,18 +66,18 @@ const Filter = () => {
   function setInterval(option: number) {
     switch (option) {
       case Cards.COUNT_4:
-        setLastIndex(Cards.COUNT_4);
+        dispatch(setIntervalEnd(Cards.COUNT_4));
         break;
       case Cards.COUNT_10:
-        setLastIndex(Cards.COUNT_10);
+        dispatch(setIntervalEnd(Cards.COUNT_10));
         break;
       default:
-        setLastIndex(Cards.COUNT_20);
+        dispatch(setIntervalEnd(Cards.COUNT_20));
     }
-    setCurrentPage(Cards.DEFAULT_PAGE_1);
-    setPage(Cards.DEFAULT_PAGE_1);
-    setFirstIndex(Interval.DEFAULT);
-    setCountCards(+option);
+    dispatch(setCurrentPage(Cards.DEFAULT_PAGE_1));
+    dispatch(setPage(Cards.DEFAULT_PAGE_1));
+    dispatch(setIntervalStart(Interval.DEFAULT));
+    dispatch(setCardsCountInPage(+option));
   }
 
   return (
