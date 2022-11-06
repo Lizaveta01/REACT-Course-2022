@@ -1,5 +1,4 @@
 import React from 'react';
-import { nanoid } from 'nanoid';
 
 import IconSpeciesImage from '../../assets/Alien.svg';
 import IconPlanetImage from '../../assets/Planet.svg';
@@ -15,6 +14,7 @@ import {
   Name,
 } from './CreatedCard.styled';
 import { ClassCSS } from '../../constants/constants';
+import { generateKey } from '../../utils/usefullFunctions';
 
 type Props = {
   card: ICreatedCard;
@@ -45,13 +45,13 @@ const CreatedCard = ({ card }: Props) => {
         <Name>{name}</Name>
         {aboutCharInfo.map((item) => {
           return (
-            <BlockContainer key={nanoid()}>
+            <BlockContainer key={generateKey(item.info)}>
               <IconDiv style={{ backgroundImage: `url(${item.icon})` }} />
               <p>{item.info}</p>
             </BlockContainer>
           );
         })}
-        <NewsIcon className={news === true ? ClassCSS.ACTIVE : ''} />
+        <NewsIcon className={news ? ClassCSS.ACTIVE : ''} />
       </Info>
     </CardItem>
   );

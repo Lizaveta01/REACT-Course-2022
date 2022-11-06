@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { nanoid } from 'nanoid';
 import { useHttp } from '../../utils/customHooks';
+import { generateKey } from '../../utils/usefullFunctions';
 
 import {
   AboutCard,
@@ -32,6 +32,7 @@ const CardPage = () => {
 
   useEffect(() => {
     getCharacter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function getCharacter() {
@@ -80,7 +81,7 @@ const CardPage = () => {
         <MainInfo>
           {aboutCharInfo.map((item) => {
             return (
-              <p key={nanoid()}>
+              <p key={generateKey(item.title)}>
                 {item.title}: {item.text}
               </p>
             );

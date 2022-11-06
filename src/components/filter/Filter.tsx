@@ -7,14 +7,13 @@ import {
   setCardsCountInPage,
   setCurrentPage,
   setGender,
-  setIntervalEnd,
-  setIntervalStart,
   setInterval,
   setPage,
   setSpecies,
   setStatus,
 } from '../../actions/actions';
 import { IReducerState } from '../../reducer/Reducer';
+import { generateKey } from '../../utils/usefullFunctions';
 
 const Filter = () => {
   const dispatch = useDispatch();
@@ -26,25 +25,21 @@ const Filter = () => {
 
   const params = [
     {
-      id: 124,
       lable: 'Species',
       option: ['alien', 'human', 'humanoid', 'unknown'],
       defaultValue: species,
     },
     {
-      id: 125,
       lable: 'Status',
       option: ['alive', 'dead', 'unknow'],
       defaultValue: status,
     },
     {
-      id: 126,
       lable: 'Gender',
       option: ['male', 'female', 'unknown', 'genderless'],
       defaultValue: gender,
     },
     {
-      id: 127,
       lable: 'Count cards',
       option: [4, 10, 20],
       defaultValue: countCardInPage,
@@ -90,7 +85,7 @@ const Filter = () => {
     <Container>
       {params.map((item) => {
         return (
-          <SelectContainer key={item.id}>
+          <SelectContainer key={generateKey(item.lable)}>
             <Label>{item.lable}</Label>
             <select
               defaultValue={item.defaultValue}
@@ -100,7 +95,7 @@ const Filter = () => {
                 Select {item.lable}
               </option>
               {item.option!.map((option: string | number, index: number) => (
-                <option key={index}>{option}</option>
+                <option key={generateKey(index)}>{option}</option>
               ))}
             </select>
           </SelectContainer>
