@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { planets } from '../../models/planets';
@@ -22,14 +22,11 @@ const Form = ({ addCard }: IProps) => {
   const schema = yup
     .object({
       name: yup.string().required().min(3),
-      birth: yup
-        .string()
-        .required()
-        .test('age', 'You must be 18 or older', function (birth) {
-          const cutoff = new Date();
-          cutoff.setFullYear(cutoff.getFullYear() - 18);
-          return birth! <= cutoff.toString();
-        }),
+      birth: yup.string().test('age', 'You must be 18 or older', function (birth) {
+        const cutoff = new Date();
+        cutoff.setFullYear(cutoff.getFullYear() - 18);
+        return new Date(birth!) <= cutoff;
+      }),
       planet: yup.string().required(),
       img: yup.mixed().test('required', 'Please upload a Photo', (value) => {
         return value != null;
@@ -39,13 +36,19 @@ const Form = ({ addCard }: IProps) => {
 
   const {
     register,
-    formState: { errors, isValid },
+    formState: { errors, isValid, isSubmitSuccessful },
     handleSubmit,
     reset,
   } = useForm<IFormData>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
+
+  useEffect(() => {
+    if (isSubmitSuccessful) {
+      reset();
+    }
+  }, [isSubmitSuccessful, reset]);
 
   const onSubmit = ({ name, birth, planet, species, img, news }: IFormData) => {
     const imgFile = img[0];
