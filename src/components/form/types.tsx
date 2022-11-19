@@ -18,7 +18,7 @@ export interface IProps {
 
 export interface IFormData {
   name: string;
-  birth: string;
+  birth: Date;
   planet: string;
   species: boolean;
   img: FileList;

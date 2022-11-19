@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import CharList from './CharList';
 import Search from '../../components/search/Search';
 import { HomePageWrapper } from './HomePage.styled';
-import { IChar, Word } from '../../constants/constants';
+import { Common, IChar, Word } from '../../constants/constants';
 import Spinner from '../../components/spinner/Spinner';
 import { getAllCharacters } from '../../service/CharService';
 
@@ -12,7 +12,7 @@ const HomePage = () => {
   const [charList, setCharList] = useState<IChar[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(Common.FIRST_PAGE);
 
   const initSearch = () => {
     onRequest();

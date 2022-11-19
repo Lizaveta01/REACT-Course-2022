@@ -15,13 +15,35 @@ import { IFormData, IProps } from './types';
 import { Word } from '../../constants/constants';
 import { ButtonSubmit } from './submitButton/SubmitButton.styled';
 
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
+
 const Form = ({ addCard }: IProps) => {
+  const schema = yup
+    .object({
+      name: yup.string().required().min(3),
+      birth: yup
+        .string()
+        .required()
+        .test('age', 'You must be 18 or older', function (birth) {
+          const cutoff = new Date();
+          cutoff.setFullYear(cutoff.getFullYear() - 18);
+          return birth! <= cutoff.toString();
+        }),
+      planet: yup.string().required(),
+      img: yup.mixed().test('required', 'Please upload a Photo', (value) => {
+        return value != null;
+      }),
+    })
+    .required();
+
   const {
     register,
     formState: { errors, isValid },
     handleSubmit,
     reset,
   } = useForm<IFormData>({
+    resolver: yupResolver(schema),
     mode: 'onBlur',
   });
 

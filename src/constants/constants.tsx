@@ -12,6 +12,10 @@ export enum ClassCSS {
   DEAD = 'dead',
 }
 
+export enum Common {
+  FIRST_PAGE = 1,
+}
+
 export interface IChar {
   id: number;
   name: string;
@@ -23,18 +27,3 @@ export interface IChar {
   };
   image: string;
 }
-
-type ApiState = {
-  searchValue: string;
-  cards: IChar[];
-  page: number;
-  currentPage: number;
-  status: string;
-  species: string;
-  gender: string;
-  sortNumber: string;
-  interval: {
-    start: number;
-    end: number;
-  };
-};
