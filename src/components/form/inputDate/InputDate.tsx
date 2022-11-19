@@ -13,7 +13,7 @@ const InputDate = ({ label, textError, name, register }: PropsComponent) => {
         <input
           type="date"
           {...register(name, {
-            validate: (value) => validationBirthday(value as string),
+            validate: (value) => validationBirthday(value),
           })}
         />
       </LabelDate>
