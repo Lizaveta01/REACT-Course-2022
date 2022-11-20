@@ -8,7 +8,16 @@ import { Container } from './Pagination.style';
 import { Colors } from '../../styles/constansts';
 import { Cards, Interval } from '../../constants/constants';
 
-const IntervalForFour = {
+type ItervalType = {
+  [key: string]: {
+    [key: string]: number;
+  };
+};
+const IntervalForFour: ItervalType = {
+  period_0: {
+    start: 16,
+    end: 20,
+  },
   period_1: {
     start: 0,
     end: 4,
@@ -17,7 +26,6 @@ const IntervalForFour = {
     start: 4,
     end: 8,
   },
-
   period_3: {
     start: 8,
     end: 12,
@@ -25,10 +33,6 @@ const IntervalForFour = {
   period_4: {
     start: 12,
     end: 16,
-  },
-  period_5: {
-    start: 16,
-    end: 20,
   },
 };
 
@@ -127,25 +131,10 @@ const PaginationComponent = () => {
   }
 
   function SetInervalToFour() {
-    const { period_1, period_2, period_3, period_4, period_5 } = IntervalForFour;
+    const period = `period_${pageNumber % Cards.DIVIDE_NUM_5}`;
+    setFirstIndex(IntervalForFour[period].start);
+    setLastIndex(IntervalForFour[period].end);
     setPage(Math.ceil(pageNumber / Cards.DIVIDE_NUM_5));
-    switch (pageNumber % Cards.DIVIDE_NUM_5) {
-      case 1:
-        setFirstIndex(period_1.start), setLastIndex(period_1.end);
-        break;
-      case 2:
-        setFirstIndex(period_2.start), setLastIndex(period_2.end);
-        break;
-      case 3:
-        setFirstIndex(period_3.start), setLastIndex(period_3.end);
-        break;
-      case 4:
-        setFirstIndex(period_4.start), setLastIndex(period_4.end);
-        break;
-      default:
-        setFirstIndex(period_5.start), setLastIndex(period_5.end);
-        break;
-    }
   }
 
   function checkCountCardsNextPage() {

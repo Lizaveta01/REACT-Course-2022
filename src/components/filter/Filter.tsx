@@ -56,11 +56,11 @@ const Filter = () => {
       case Word.GENDER:
         return setGender(option);
       case Word.COUNT_CARDS:
-        return setInterval(+option);
+        return setCardsInterval(+option);
     }
   };
 
-  function setInterval(option: number) {
+  function setCardsInterval(option: number) {
     switch (option) {
       case Cards.COUNT_4:
         setLastIndex(Cards.COUNT_4);

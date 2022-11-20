@@ -30,6 +30,14 @@ export enum Cards {
   DIVIDE_NUM_5 = 5,
 }
 
+export enum StatedDefault {
+  CARDS_NUMBER = 0,
+  FIRST_PAGE = 1,
+  COUNT_CARDS_IN_PAGE = 20,
+  START_INTERVAL = 0,
+  END_INTERVAL = COUNT_CARDS_IN_PAGE,
+}
+
 export interface IChar {
   id: number;
   name: string;

@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { createContext, ReactElement, useReducer } from 'react';
-import { IChar } from '../constants/constants';
+import { IChar, StatedDefault } from '../constants/constants';
 
 interface IContext {
   search: string;
@@ -99,6 +99,20 @@ const reducer = (state: State, action: Action) => {
   }
 };
 
+const initialState: State = {
+  search: '',
+  cards: [],
+  cardsNumber: StatedDefault.CARDS_NUMBER,
+  gender: '',
+  page: StatedDefault.FIRST_PAGE,
+  currentPage: StatedDefault.FIRST_PAGE,
+  status: '',
+  species: '',
+  countCardInPage: StatedDefault.COUNT_CARDS_IN_PAGE,
+  lastContentIndex: StatedDefault.END_INTERVAL,
+  firstContentIndex: StatedDefault.START_INTERVAL,
+};
+
 export const AppContext = createContext({} as IContext);
 
 export const useMyContext = () => {
@@ -106,19 +120,7 @@ export const useMyContext = () => {
 };
 
 export const AppContextProvider = ({ children }: Props) => {
-  const [state, dispatch] = useReducer(reducer, {
-    search: '',
-    cards: [],
-    cardsNumber: 0,
-    gender: '',
-    page: 1,
-    currentPage: 1,
-    status: '',
-    species: '',
-    countCardInPage: 20,
-    lastContentIndex: 20,
-    firstContentIndex: 0,
-  });
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const setSearch = (search: string) => {
     dispatch({ type: SET_SEARCH, search });
