@@ -11,7 +11,7 @@ import {
   setPage,
   setInterval,
   setCardsNumber,
-} from '../actions/actions';
+} from './actions/actions';
 import { IChar } from '../constants/constants';
 
 export interface IReducerState {

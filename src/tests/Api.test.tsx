@@ -44,6 +44,5 @@ describe('get data from response', () => {
     fireEvent.change(searchInput, { target: { value: 'Rick' } });
     fireEvent.keyDown(searchInput, { key: 'Enter', code: 'Enter', charCode: 13 });
     expect(screen.getByTestId('spinner')).toBeInTheDocument();
-    // expect(axios.get).toBeCalledTimes(1);
   });
 });

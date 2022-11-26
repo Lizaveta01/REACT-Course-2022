@@ -8,8 +8,8 @@ import { Container } from './Pagination.style';
 import { Colors } from '../../styles/constansts';
 
 import { Cards, Interval } from '../../constants/constants';
-import { setCurrentPage, setPage, setInterval } from '../../actions/actions';
-import { IReducerState } from '../../reducer/Reducer';
+import { setCurrentPage, setPage, setInterval } from '../../store/actions/actions';
+import { IReducerState } from '../../store/Reducer';
 
 const IntervalForFour = {
   period_1: {

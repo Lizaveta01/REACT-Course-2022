@@ -9,10 +9,6 @@ type Props = {
 };
 
 const ModalWindow = ({ closeWindow, card }: Props) => {
-  const handleCloseWindow = () => {
-    closeWindow();
-  };
-
   const data = [
     {
       id: 111,
@@ -44,7 +40,7 @@ const ModalWindow = ({ closeWindow, card }: Props) => {
   return (
     <ModalWrapper data-testid="modal-window">
       <Container>
-        <ButtonClose onClick={handleCloseWindow} data-testid="button-modal-window" />
+        <ButtonClose onClick={closeWindow} data-testid="button-modal-window" />
         <ImgContainer style={{ backgroundImage: `url(${card.image})` }} data-testid="modal-image" />
         <Info>
           {data.map((item) => {

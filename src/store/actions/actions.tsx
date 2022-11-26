@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { useHttp } from '../utils/customHooks';
+import { useHttp } from '../../utils/customHooks';
 import {
   CARDS_FETCHING,
   SET_SEARCH,

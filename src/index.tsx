@@ -5,17 +5,14 @@ import { BrowserRouter } from 'react-router-dom';
 
 import './index.scss';
 import App from './app/App';
-import { AppContextProvider } from './context/Context';
-import { store } from './reducer/Store';
+import { store } from './store/Store';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLDivElement);
 root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
-        <AppContextProvider>
-          <App />
-        </AppContextProvider>
+        <App />
       </BrowserRouter>
     </Provider>
   </React.StrictMode>,
