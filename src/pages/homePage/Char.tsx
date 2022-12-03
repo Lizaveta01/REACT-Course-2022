@@ -2,9 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { ClassCSS, IChar, Word } from '../../constants/constants';
+
 import IconPlanetImage from '../../assets/Planet.svg';
 import IconGenderImage from '../../assets/Gender.svg';
 import IconSpeciesImage from '../../assets/Alien.svg';
+
 import {
   CharItem,
   ButtonAddFavorite,
@@ -17,7 +19,6 @@ import {
   ItemContainer,
   AboutCharAddit,
 } from './HomePage.styled';
-import { generateKey } from '../../utils/usefullFunctions';
 
 type Props = {
   char: IChar;
@@ -66,7 +67,7 @@ const Char = ({ char }: Props) => {
           <AboutCharAddit>
             {aboutCharInfo.map((item, index) => {
               return (
-                <ItemContainer key={generateKey(`${item.info}${index}`)}>
+                <ItemContainer key={index}>
                   <IconDiv style={{ backgroundImage: `url(${item.icon})` }} />
                   <p>{item.info}</p>
                 </ItemContainer>

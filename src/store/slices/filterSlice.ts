@@ -1,6 +1,20 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialState = {
+interface IFilterSlice {
+  search: string;
+  gender: string;
+  status: string;
+  species: string;
+  page: number;
+  currentPage: number;
+  countCardInPage: number;
+  interval: {
+    start: number;
+    end: number;
+  };
+}
+
+const initialState: IFilterSlice = {
   search: '',
   gender: '',
   status: '',
@@ -39,16 +53,22 @@ const filterSlice = createSlice({
     setCardsCountInPage: (state, action) => {
       state.countCardInPage = action.payload;
     },
-    setCardsNumber: (state, action) => {
-      state.cardsNumber = action.payload;
-    },
     setCardInterval: (state, action) => {
       state.interval.start = action.payload.start;
       state.interval.end = action.payload.end;
-    })
+    },
   },
 });
 
-const { actions, reducer } = fetchDataSlice;
-export const { pending } = actions;
+const { actions, reducer } = filterSlice;
+export const {
+  setSearch,
+  setGender,
+  setStatus,
+  setSpecies,
+  setPage,
+  setCurrentPage,
+  setCardsCountInPage,
+  setCardInterval,
+} = actions;
 export default reducer;

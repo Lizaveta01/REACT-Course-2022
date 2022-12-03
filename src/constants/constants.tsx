@@ -16,6 +16,11 @@ export enum ClassCSS {
   DEAD = 'dead',
 }
 
+export enum HttpRequests {
+  GET = 'GET',
+  TYPE = 'application/json',
+}
+
 export enum Interval {
   DEFAULT = 0,
 }

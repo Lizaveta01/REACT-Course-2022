@@ -1,27 +1,29 @@
 import React from 'react';
 import { Cards, Interval, Word } from '../../constants/constants';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { SelectContainer, Container, Label } from './Filter.styled';
 import {
   setCardsCountInPage,
   setCurrentPage,
   setGender,
-  setInterval,
+  setCardInterval,
   setPage,
   setSpecies,
   setStatus,
-} from '../../actions/actions';
-import { IReducerState } from '../../reducer/Reducer';
-import { generateKey } from '../../utils/usefullFunctions';
+} from '../../store/slices/filterSlice';
+
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
 
 const Filter = () => {
-  const dispatch = useDispatch();
-  const gender = useSelector((state: IReducerState) => state.gender);
-  const status = useSelector((state: IReducerState) => state.status);
-  const species = useSelector((state: IReducerState) => state.species);
-
-  const countCardInPage = useSelector((state: IReducerState) => state.countCardInPage);
+  const dispatch = useAppDispatch();
+  const { gender, status, species, countCardInPage } = useAppSelector((state) => {
+    return {
+      gender: state.filter.gender,
+      status: state.filter.status,
+      species: state.filter.species,
+      countCardInPage: state.filter.countCardInPage,
+    };
+  });
 
   const params = [
     {
@@ -78,14 +80,14 @@ const Filter = () => {
     dispatch(setCardsCountInPage(+option));
     dispatch(setCurrentPage(Cards.DEFAULT_PAGE_1));
     dispatch(setPage(Cards.DEFAULT_PAGE_1));
-    dispatch(setInterval(period));
+    dispatch(setCardInterval(period));
   }
 
   return (
     <Container>
       {params.map((item) => {
         return (
-          <SelectContainer key={generateKey(item.lable)}>
+          <SelectContainer key={item.lable}>
             <Label>{item.lable}</Label>
             <select
               defaultValue={item.defaultValue}
@@ -95,7 +97,7 @@ const Filter = () => {
                 Select {item.lable}
               </option>
               {item.option!.map((option: string | number, index: number) => (
-                <option key={generateKey(index)}>{option}</option>
+                <option key={index}>{option}</option>
               ))}
             </select>
           </SelectContainer>

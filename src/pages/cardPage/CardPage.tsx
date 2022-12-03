@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useHttp } from '../../utils/customHooks';
-import { generateKey } from '../../utils/usefullFunctions';
 
 import {
   AboutCard,
@@ -79,9 +78,9 @@ const CardPage = () => {
           <img src={character?.image} alt="char-image" />
         </ItemImageDiv>
         <MainInfo>
-          {aboutCharInfo.map((item) => {
+          {aboutCharInfo.map((item, index) => {
             return (
-              <p key={generateKey(item.title)}>
+              <p key={index}>
                 {item.title}: {item.text}
               </p>
             );

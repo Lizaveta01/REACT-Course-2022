@@ -1,25 +1,30 @@
 import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import CharList from './CharList';
 import Search from '../../components/search/Search';
 import { HomePageWrapper, InfoMessage } from './HomePage.styled';
 import Spinner from '../../components/spinner/Spinner';
 import Settings from '../../components/settings/Settings';
-import { fetchCards, setSearch } from '../../actions/actions';
-import { IReducerState } from '../../reducer/Reducer';
-import { AppDispatch } from '../../reducer/Store';
+import { useAppDispatch, useAppSelector } from '../../hooks/hooks';
+import { setSearch } from '../../store/slices/filterSlice';
+import { fetchCards } from '../../store/actions/actions';
 
 const HomePage = () => {
-  const loadingStatus = useSelector((state: IReducerState) => state.loadingStatus);
-  const cards = useSelector((state: IReducerState) => state.cards);
-  const search = useSelector((state: IReducerState) => state.search);
-  const gender = useSelector((state: IReducerState) => state.gender);
-  const status = useSelector((state: IReducerState) => state.status);
-  const species = useSelector((state: IReducerState) => state.species);
-  const page = useSelector((state: IReducerState) => state.page);
-  const countCardInPage = useSelector((state: IReducerState) => state.countCardInPage);
-  const dispatch: AppDispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const { cards, search, gender, status, species, page, countCardInPage, isError, isLoading } =
+    useAppSelector((state) => {
+      return {
+        cards: state.fetch_data.cards,
+        search: state.filter.search,
+        gender: state.filter.gender,
+        status: state.filter.status,
+        species: state.filter.species,
+        page: state.filter.page,
+        countCardInPage: state.filter.countCardInPage,
+        isLoading: state.fetch_data.isLoading,
+        isError: state.fetch_data.isError,
+      };
+    });
 
   useEffect(() => {
     const apiBase = 'https://rickandmortyapi.com/api';
@@ -37,9 +42,9 @@ const HomePage = () => {
     <HomePageWrapper>
       <Search search={search} setSearch={(value: string) => changeSearch(value)} />
       <Settings />
-      {loadingStatus === 'loading' ? (
+      {isLoading ? (
         <Spinner />
-      ) : loadingStatus === 'error' ? (
+      ) : isError ? (
         <InfoMessage>Loading Error</InfoMessage>
       ) : (
         <>

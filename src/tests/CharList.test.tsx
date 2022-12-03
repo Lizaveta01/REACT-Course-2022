@@ -4,7 +4,7 @@ import React from 'react';
 
 import CharList from '../pages/homePage/CharList';
 import { Provider } from 'react-redux';
-import { store } from '../reducer/Store';
+import { store } from '../store/Store';
 
 const charList = [
   {

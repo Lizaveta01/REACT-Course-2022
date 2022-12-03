@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from '../app/App';
 import { Provider } from 'react-redux';
-import { store } from '../reducer/Store';
+import { store } from '../store/Store';
 
 describe('App', () => {
   it('render menu pages', () => {

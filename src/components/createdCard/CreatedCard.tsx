@@ -14,7 +14,6 @@ import {
   Name,
 } from './CreatedCard.styled';
 import { ClassCSS } from '../../constants/constants';
-import { generateKey } from '../../utils/usefullFunctions';
 
 type Props = {
   card: ICreatedCard;
@@ -43,9 +42,9 @@ const CreatedCard = ({ card }: Props) => {
       <ImgContainer style={{ backgroundImage: `url(${img})` }} />
       <Info>
         <Name>{name}</Name>
-        {aboutCharInfo.map((item) => {
+        {aboutCharInfo.map((item, index) => {
           return (
-            <BlockContainer key={generateKey(item.info)}>
+            <BlockContainer key={index}>
               <IconDiv style={{ backgroundImage: `url(${item.icon})` }} />
               <p>{item.info}</p>
             </BlockContainer>

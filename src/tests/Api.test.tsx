@@ -5,7 +5,7 @@ import axios from 'axios';
 import HomePage from '../pages/homePage/HomePage';
 import { IChar } from '../constants/constants';
 import { Provider } from 'react-redux';
-import { store } from '../reducer/Store';
+import { store } from '../store/Store';
 
 jest.mock('axios');
 

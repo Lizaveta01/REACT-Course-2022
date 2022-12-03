@@ -1,8 +1,8 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { IChar } from '../../constants/constants';
-import { IReducerState } from '../../reducer/Reducer';
+import { useAppSelector } from '../../hooks/hooks';
+
 import Char from './Char';
 import { CharListWrapper } from './HomePage.styled';
 
@@ -11,8 +11,12 @@ type Props = {
 };
 
 const CharList = ({ charList }: Props) => {
-  const intervalStart = useSelector((state: IReducerState) => state.interval.start);
-  const intervalEnd = useSelector((state: IReducerState) => state.interval.end);
+  const { intervalStart, intervalEnd } = useAppSelector((state) => {
+    return {
+      intervalStart: state.filter.interval.start,
+      intervalEnd: state.filter.interval.end,
+    };
+  });
 
   const renderItems = (arr: IChar[]) => {
     const items = arr.slice(intervalStart, intervalEnd).map((item: IChar) => {
