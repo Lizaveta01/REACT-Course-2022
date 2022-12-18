@@ -1,0 +1,10 @@
+export const CARDS_FETCHING = 'CARDS_FETCHING';
+export const SET_CARDS_NUMBER = 'SET_CARDS_NUMBER';
+export const SET_PAGE = 'SET_PAGE';
+export const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+export const SET_COUNT_CARD_IN_PAGE = 'SET_COUNT_CARD_IN_PAGE';
+export const SET_INTERVAL = 'SET_INTERVAL';
+export const SET_SEARCH = 'SET_SEARCH';
+export const SET_GENDER = 'SET_GENDER';
+export const SET_STATUS = 'SET_STATUS';
+export const SET_SPECIES = 'SET_SPECIES';
